@@ -9,8 +9,27 @@
 	<LangVersion>14</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Randhomme.TPToolkitLib" Version="1.0.1" />
+	<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.48">
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
   </ItemGroup>
+
+  <Target Name="ILRepack" AfterTargets="Build" Condition="$(Configuration.Contains('Release')) and !Exists('$(ILRepackTargetsFile)')">
+	  <ItemGroup>
+		  <InputAssemblies Include="$(OutputPath)*.dll" />
+	  </ItemGroup>
+	  <ILRepack AllowDuplicateResources="false" DebugInfo="false" Internalize="true" InputAssemblies="@(InputAssemblies)" OutputFile="$(TargetPath)" Parallel="true" TargetKind="SameAsPrimaryAssembly" />
+  </Target>
 
 </Project>
