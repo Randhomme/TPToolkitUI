@@ -7,12 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using TPToolkitUI.Services;
+using TPToolkitUI.Services.Implementations;
 
 namespace TPToolkitUI.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
+        private readonly IDialogService dialogService;
         private AppSettings settings = new();
+
+        public MainViewModel()
+        {
+            dialogService = new DialogService(Application.Current.MainWindow);
+        }
 
         public void LoadSettings()
         {
@@ -23,10 +31,15 @@ namespace TPToolkitUI.ViewModels
             }
         }
 
+        public void SaveSettings()
+        {
+            settings.Save();
+        }
+
         [RelayCommand]
         private void OnOpenAppSettings()
         {
-            
+            dialogService.ShowSettings(settings);
         }
     }
 }
