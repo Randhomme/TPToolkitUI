@@ -55,8 +55,7 @@ namespace TPToolkitUI
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            MainViewModel vm = (MainViewModel)DataContext;
-            vm.LoadSettings();
+            ((MainViewModel)DataContext).LoadSettings();
             #if !DEBUG //Don't check for updates in debug mode
                 var local = new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
                 var latest = await GetLatestGitHubVersionAsync();
@@ -78,6 +77,11 @@ namespace TPToolkitUI
                     }
                 }
             #endif
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            ((MainViewModel)DataContext).SaveSettings();
         }
 
         #endregion
