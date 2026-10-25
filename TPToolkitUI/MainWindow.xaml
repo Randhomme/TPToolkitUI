@@ -8,9 +8,6 @@
         xmlns:vm="clr-namespace:TPToolkitUI.ViewModels"
         mc:Ignorable="d"
         Title="TPToolkitUI" Height="450" Width="800" ContentRendered="Window_ContentRendered" Closed="Window_Closed">
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -18,7 +15,7 @@
         </Grid.RowDefinitions>
         <Menu Padding="5,0">
             <MenuItem Header="App">
-                <MenuItem Header="Settings" Command="{Binding OpenAppSettingsCommand}"/>
+                <MenuItem Header="Settings" Click="AppSettingsMenuItem_Click"/>
                 <MenuItem Header="About"/>
             </MenuItem>
         </Menu>

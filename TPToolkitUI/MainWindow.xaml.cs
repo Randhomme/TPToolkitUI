@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TPToolkitUI.ViewModels;
+using TPToolkitUI.Dialogs;
 
 namespace TPToolkitUI
 {
@@ -19,8 +20,10 @@ namespace TPToolkitUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainViewModel vm = new();
         public MainWindow()
         {
+            DataContext = vm;
             InitializeComponent();
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             Title = $"{Title} v{version.Major}.{version.Minor}.{version.Build}";
@@ -51,11 +54,20 @@ namespace TPToolkitUI
 
         #endregion
 
+        #region Menu events
+
+        private void AppSettingsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            new AppSettingsDialog(this, new(vm.Settings)).ShowDialog();
+        }
+
+        #endregion
+
         #region Window events
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            ((MainViewModel)DataContext).LoadSettings();
+            vm.LoadSettings();
             #if !DEBUG //Don't check for updates in debug mode
                 var local = new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
                 var latest = await GetLatestGitHubVersionAsync();
@@ -81,7 +93,7 @@ namespace TPToolkitUI
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            ((MainViewModel)DataContext).SaveSettings();
+            vm.SaveSettings();
         }
 
         #endregion
