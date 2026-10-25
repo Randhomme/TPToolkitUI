@@ -23,21 +23,6 @@ namespace TPToolkitUI.ViewModels
         }
 
         [RelayCommand]
-        private void OnBrowseTPGameDirectory()
-        {
-            var fbd = new WF.FolderBrowserDialog()
-            {
-                Description = "Select your TPGame folder",
-                ShowNewFolderButton = false,
-                SelectedPath = TPGameDirectory
-            };
-            if (fbd.ShowDialog() == WF.DialogResult.OK)
-            {
-                TPGameDirectory = fbd.SelectedPath;
-            }
-        }
-
-        [RelayCommand]
         private void OnSaveAppSettings()
         {
             settings.TPGameDirectory = TPGameDirectory;
