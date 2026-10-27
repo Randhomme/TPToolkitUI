@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
-    <PackageReference Include="Randhomme.TPToolkitLib" Version="1.0.1" />
+    <PackageReference Include="Randhomme.TPToolkitLib" Version="1.0.2" />
 	<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.48">
 		<PrivateAssets>all</PrivateAssets>
 		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
