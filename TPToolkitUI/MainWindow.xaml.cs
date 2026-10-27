@@ -1,5 +1,6 @@
-﻿using System.Reflection;
+﻿using System.Globalization;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,8 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TPToolkitUI.ViewModels;
 using TPToolkitUI.Dialogs;
+using TPToolkitUI.ViewModels;
 
 namespace TPToolkitUI
 {
@@ -23,6 +24,8 @@ namespace TPToolkitUI
         private readonly MainViewModel vm = new();
         public MainWindow()
         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
             DataContext = vm;
             InitializeComponent();
             var version = Assembly.GetExecutingAssembly().GetName().Version;
@@ -52,13 +55,25 @@ namespace TPToolkitUI
             catch { return null; }
         }
 
+        /// <summary>
+        /// Open AppSettingsDialog and start loading TPGame if needed
+        /// </summary>
+        private void OpenAppSettingsDialog()
+        {
+            var appSettingsVm = new AppSettingsViewModel(vm.Settings);
+            if (new AppSettingsDialog(this, appSettingsVm).ShowDialog() == true && appSettingsVm.HasTPGameDirectoryChanged)
+            {
+                new ProgressDialog(this, new(vm.LoadTPGame)).Start(true, true);
+            }
+        }
+
         #endregion
 
         #region Menu events
 
         private void AppSettingsMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            new AppSettingsDialog(this, new(vm.Settings)).ShowDialog();
+            OpenAppSettingsDialog();
         }
 
         #endregion
@@ -68,6 +83,15 @@ namespace TPToolkitUI
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             vm.LoadSettings();
+            if (vm.HasTPGameDirectory)
+            {
+                new ProgressDialog(this, new(vm.LoadTPGame)).Start(true, false);
+            }
+            else
+            {
+                MessageBox.Show("Set the TPGame directory in the app settings first.");
+                OpenAppSettingsDialog();
+            }
             #if !DEBUG //Don't check for updates in debug mode
                 var local = new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
                 var latest = await GetLatestGitHubVersionAsync();
