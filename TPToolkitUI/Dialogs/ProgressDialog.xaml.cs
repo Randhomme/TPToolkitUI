@@ -32,27 +32,5 @@ namespace TPToolkitUI.Dialogs
             });
             ShowDialog();
         }
-
-        //public void RunAction(Action<IProgress<string>, IProgress<string>> action, bool autoClose = false, bool notifyOnAutoClose = true)
-        //{
-        //    Task.Run(() =>
-        //    {
-        //        action?.Invoke(this.Progress, this.ProgressLogs);
-        //        this.Dispatcher.Invoke(() => { CanClose = true; }, System.Windows.Threading.DispatcherPriority.SystemIdle);
-        //    });
-        //    this.ShowDialog();
-        //}
-
-        //public void RunActionSameThread(Action<IProgress<string>, IProgress<string>> action, bool autoClose = false, bool notifyOnAutoClose = true)
-        //{
-        //    this.Dispatcher.InvokeAsync(() =>
-        //    {
-        //        action?.Invoke(this.Progress, this.ProgressLogs);
-        //        this.Dispatcher.Invoke(() => { CanClose = true; }, System.Windows.Threading.DispatcherPriority.SystemIdle);
-        //    }, System.Windows.Threading.DispatcherPriority.SystemIdle);
-        //    this.ShowDialog();
-        //}
-
-
     }
 }

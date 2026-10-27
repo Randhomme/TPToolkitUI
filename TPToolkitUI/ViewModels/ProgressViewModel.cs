@@ -1,10 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace TPToolkitUI.ViewModels
 {
@@ -50,45 +44,5 @@ namespace TPToolkitUI.ViewModels
             work(Progress, ProgressLogs);
             IsWorkDone = true;
         }
-
-        //public void RunAction(Action<IProgress<string>, IProgress<string>> action, bool autoClose = false, bool notifyOnAutoClose = true)
-        //{
-        //    Logs = string.Empty;
-        //    this.AutoClose = autoClose;
-        //    this.NotifyOnAutoClose = notifyOnAutoClose;
-        //    Task.Run(() =>
-        //    {
-        //        action?.Invoke(this.Progress, this.ProgressLogs);
-        //        this.Dispatcher.Invoke(() => { CanClose = true; }, System.Windows.Threading.DispatcherPriority.SystemIdle);
-        //    });
-        //    this.ShowDialog();
-        //}
-
-        //public void RunActionSameThread(Action<IProgress<string>, IProgress<string>> action, bool autoClose = false, bool notifyOnAutoClose = true)
-        //{
-        //    Logs = string.Empty;
-        //    this.AutoClose = autoClose;
-        //    this.NotifyOnAutoClose = notifyOnAutoClose;
-        //    this.Dispatcher.InvokeAsync(() =>
-        //    {
-        //        action?.Invoke(this.Progress, this.ProgressLogs);
-        //        this.Dispatcher.Invoke(() => { CanClose = true; }, System.Windows.Threading.DispatcherPriority.SystemIdle);
-        //    }, System.Windows.Threading.DispatcherPriority.SystemIdle);
-        //    this.ShowDialog();
-        //}
-
-        //partial void OnCanCloseChanged(bool value)
-        //{
-        //    if (value)
-        //    {
-        //        ProgressBarIndeterminate = false;
-        //        if (AutoClose && string.IsNullOrEmpty(Logs))
-        //        {
-        //            this.Dispatcher.Invoke(() => this.Close());
-        //            if (NotifyOnAutoClose)
-        //                MessageBox.Show($"{CurrentOperation}", Title, MessageBoxButton.OK, MessageBoxImage.Information);
-        //        }
-        //    }
-        //}
     }
 }
