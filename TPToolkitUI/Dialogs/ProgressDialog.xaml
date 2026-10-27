@@ -1,0 +1,24 @@
+﻿<local:DialogWindow x:Class="TPToolkitUI.Dialogs.ProgressDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TPToolkitUI.Dialogs"
+        xmlns:vm="clr-namespace:TPToolkitUI.ViewModels"
+        mc:Ignorable="d"
+        Height="450" Width="800" ShowInTaskbar="False">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="True">
+            <Label x:Name="ProgressLabel" Margin="-5,0,0,0" Content="{Binding CurrentOperation}" DockPanel.Dock="Top"/>
+            <ProgressBar x:Name="ProgressBar" DockPanel.Dock="Top" IsIndeterminate="{Binding IsWorkOnGoing}" Height="20" Value="100"/>
+            <TextBox x:Name="LogsTextBox" Margin="0,5,0,0" Text="{Binding Logs}" IsReadOnly="True" TextWrapping="Wrap" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+        </DockPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,15,0,0" HorizontalAlignment="Right">
+            <Button Content="Close" MinWidth="85" Click="SaveButton_Click" IsEnabled="{Binding IsWorkDone}" IsDefault="True" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</local:DialogWindow>
