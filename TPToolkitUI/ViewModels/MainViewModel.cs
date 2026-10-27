@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Windows;
+using TPToolkitLib.Tools;
 
 namespace TPToolkitUI.ViewModels
 {
@@ -7,18 +7,31 @@ namespace TPToolkitUI.ViewModels
     {
         public AppSettings Settings { get; private set; } = new();
 
+        public bool HasTPGameDirectory { get => !string.IsNullOrEmpty(Settings.TPGameDirectory); }
+
         public void LoadSettings()
         {
             Settings = Settings.Load();
-            if (string.IsNullOrEmpty(Settings.TPGameDirectory))
-            {
-                MessageBox.Show("You should set your TPGame directory in the app settings.");
-            }
         }
 
         public void SaveSettings()
         {
             Settings.Save();
+        }
+
+        public void LoadTPGame(IProgress<string> progress, IProgress<string> progressLogs)
+        {
+            progress.Report("Loading TPGame folder ...");
+            try
+            {
+                TPGameTool.LoadTPGameFolder(Settings.TPGameDirectory);
+                progress.Report("TPGame folder loaded successfully !");
+            }
+            catch (Exception ex)
+            {
+                progressLogs.Report(ex.Message);
+                progress.Report("Fail to load TPGame folder");
+            }
         }
     }
 }
