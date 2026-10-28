@@ -12,13 +12,14 @@ namespace TPToolkitUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly MainViewModel vm = new();
+        private readonly MainViewModel vm;
         public MainWindow()
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
-            DataContext = vm;
             InitializeComponent();
+            vm = (MainViewModel)DataContext;
+            vm.LoadSettings();
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             Title = $"{Title} v{version.Major}.{version.Minor}.{version.Build}";
         }
@@ -73,7 +74,6 @@ namespace TPToolkitUI
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            vm.LoadSettings();
             if (vm.HasTPGameDirectory)
             {
                 new ProgressDialog(this, new(vm.LoadTPGame)).Start(true, false);
