@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
+using TPToolkitUI.Enums;
 
 namespace TPToolkitUI
 {
@@ -7,6 +8,12 @@ namespace TPToolkitUI
     {
         private readonly string filename = "TPToolkitUI.xml";
         public string TPGameDirectory { get; set; } = string.Empty;
+        public bool ExportLods { get; set; } = true;
+        public string LastMDBImportDirectory { get; set; } = string.Empty;
+        public string LastMDBExportDirectory { get; set; } = string.Empty;
+        public string Last3DFileImportDirectory { get; set; } = string.Empty;
+        public string Last3DFileExportDirectory { get; set; } = string.Empty;
+        public File3DFormat Prefered3DFileFormat { get; set; } = File3DFormat.glb;
         public AppSettings Load()
         {
             try
