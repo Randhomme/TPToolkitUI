@@ -14,11 +14,11 @@ namespace TPToolkitUI.ViewModels
         public partial string Logs { get; set; } = string.Empty;
 
         [ObservableProperty]
-        public partial string CurrentOperation { get; set; } = "Working...";
+        public partial string CurrentOperation { get; private set; } = "Working...";
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsWorkOnGoing))]
-        public partial bool IsWorkDone { get; set; } = false;
+        public partial bool IsWorkDone { get; private set; } = false;
 
         public bool IsWorkOnGoing { get => !IsWorkDone; }
 
