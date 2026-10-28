@@ -7,7 +7,10 @@
         xmlns:views="clr-namespace:TPToolkitUI.Views"
         xmlns:vm="clr-namespace:TPToolkitUI.ViewModels"
         mc:Ignorable="d"
-        Title="TPToolkitUI" Height="450" Width="800" ContentRendered="Window_ContentRendered" Closed="Window_Closed">
+        Title="TPToolkitUI" Height="450" Width="800" ContentRendered="Window_ContentRendered" Closed="Window_Closed" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
