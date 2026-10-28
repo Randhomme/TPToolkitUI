@@ -9,6 +9,7 @@ namespace TPToolkitUI.Dialogs
             Owner = owner;
             WindowStartupLocation = WindowStartupLocation.CenterOwner;
         }
+
         public bool? ShowDialog(bool showInTaskBar = false)
         {
             ShowInTaskbar = showInTaskBar;
