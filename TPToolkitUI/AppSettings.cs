@@ -11,6 +11,8 @@ namespace TPToolkitUI
         public bool ExportLods { get; set; } = true;
         public string LastMDBImportDirectory { get; set; } = string.Empty;
         public string LastMDBExportDirectory { get; set; } = string.Empty;
+        public string LastMSBImportDirectory { get; set; } = string.Empty;
+        public string LastMSBExportDirectory { get; set; } = string.Empty;
         public string Last3DFileImportDirectory { get; set; } = string.Empty;
         public string Last3DFileExportDirectory { get; set; } = string.Empty;
         public File3DFormat Prefered3DFileFormat { get; set; } = File3DFormat.glb;
