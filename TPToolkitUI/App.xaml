@@ -6,6 +6,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/CollectionEditorControlStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/DataGridStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/TextGroupBoxStyle.xaml"/>
                 <!--<ResourceDictionary Source="/Styles/MenuStyle.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
