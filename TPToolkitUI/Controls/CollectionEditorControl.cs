@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -10,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using static SharpGLTF.Scenes.LightBuilder;
 
 namespace TPToolkitUI.Controls
 {
@@ -217,23 +217,19 @@ namespace TPToolkitUI.Controls
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
+                    foreach (var item in e.NewItems)
                     {
-                        foreach (var item in e.NewItems)
-                        {
-                            var wrapper = Wrappers.FirstOrDefault((w) => w.Item == item);
-                            dataGrid.SelectedItems.Add(wrapper);
-                        }
-                        break;
+                        var wrapper = Wrappers.FirstOrDefault((w) => w.Item == item);
+                        dataGrid.SelectedItems.Add(wrapper);
                     }
+                    break;
                 case NotifyCollectionChangedAction.Remove:
+                    foreach (var item in e.OldItems)
                     {
-                        foreach (var item in e.OldItems)
-                        {
-                            var wrapper = Wrappers.FirstOrDefault((w) => w.Item == item);
-                            dataGrid.SelectedItems.Remove(wrapper);
-                        }
-                        break;
+                        var wrapper = Wrappers.FirstOrDefault((w) => w.Item == item);
+                        dataGrid.SelectedItems.Remove(wrapper);
                     }
+                    break;
                 case NotifyCollectionChangedAction.Reset:
                     {
                         dataGrid.SelectedItems.Clear();
@@ -297,8 +293,9 @@ namespace TPToolkitUI.Controls
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
-                    foreach (var item in e.OldItems)
-                        RemoveWrapper(item);
+                    //foreach (var item in e.OldItems)
+                    //    RemoveWrapper(item);
+                    RemoveWrapper(e.OldStartingIndex);
                     UpdateFromIndex(e.OldStartingIndex);
                     break;
 
@@ -318,6 +315,11 @@ namespace TPToolkitUI.Controls
                         }
                     }
                     break;
+
+                case NotifyCollectionChangedAction.Move:
+                    Wrappers?.Move(e.OldStartingIndex, e.NewStartingIndex);
+                    UpdateFromIndex(Math.Min(e.OldStartingIndex, e.NewStartingIndex), Math.Max(e.OldStartingIndex, e.NewStartingIndex) + 1);
+                    break;
             }
             moveUpCommand.NotifyCanExecuteChanged();
             moveDownCommand.NotifyCanExecuteChanged();
@@ -330,6 +332,19 @@ namespace TPToolkitUI.Controls
             {
                 wrapper.Dispose();
                 Wrappers?.Remove(wrapper);
+            }
+        }
+
+        private void RemoveWrapper(int index)
+        {
+            if (Wrappers != null && index < Wrappers.Count)
+            {
+                var wrapper = Wrappers[index];
+                if (wrapper != null)
+                {
+                    wrapper.Dispose();
+                    Wrappers.RemoveAt(index);
+                }
             }
         }
 
@@ -579,6 +594,21 @@ namespace TPToolkitUI.Controls
             }
         }
 
+        private bool MoveItem(int oldIndex, int newIndex)
+        {
+            if (EditableList == null)
+                return false;
+
+            var moveMethod = EditableList.GetType().GetMethod("Move", [typeof(int), typeof(int)]);
+            if (moveMethod != null)
+            {
+                moveMethod.Invoke(EditableList, [oldIndex, newIndex]);
+                return true;
+            }
+            (EditableList[oldIndex], EditableList[newIndex]) = (EditableList[newIndex], EditableList[oldIndex]);
+            return false;
+        }
+
         private bool CanDeleteSelectedItems()
         {
             return dataGrid?.SelectedItems.Count > 0;
@@ -596,13 +626,14 @@ namespace TPToolkitUI.Controls
                 .Select(i => EditableList.IndexOf(i))
                 .OrderBy(i => i)
                 .ToList();
+            var preservesItemIdentity = true;
 
             if (direction < 0) // Up
             {
                 for (int i = 0; i < indices.Count; i++)
                 {
                     var index = indices[i];
-                    (EditableList[index], EditableList[index + direction]) = (EditableList[index + direction], EditableList[index]);
+                    preservesItemIdentity &= MoveItem(index, index + direction);
                 }
                 UpdateFromIndex(indices.FirstOrDefault() + direction, indices.LastOrDefault() + 1);
             }
@@ -611,12 +642,13 @@ namespace TPToolkitUI.Controls
                 for (int i = indices.Count - 1; i >= 0; i--)
                 {
                     var index = indices[i];
-                    (EditableList[index], EditableList[index + direction]) = (EditableList[index + direction], EditableList[index]);
+                    preservesItemIdentity &= MoveItem(index, index + direction);
                 }
                 UpdateFromIndex(indices.FirstOrDefault(), indices.LastOrDefault() + direction);
             }
 
-            RestoreSelection(items);
+            if (!preservesItemIdentity)
+                RestoreSelection(items);
 
             moveUpCommand.NotifyCanExecuteChanged();
             moveDownCommand.NotifyCanExecuteChanged();
