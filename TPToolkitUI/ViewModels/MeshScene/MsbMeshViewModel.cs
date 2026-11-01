@@ -1,23 +1,12 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using TPToolkitLib.MeshScene.Classes;
+﻿using TPToolkitLib.MeshScene.Classes;
+using TPToolkitUI.Utils;
 
 namespace TPToolkitUI.ViewModels.MeshScene
 {
-    public class MsbMeshViewModel : ObservableObject
+    public class MsbMeshViewModel : MsbElementViewModel<MsbMesh>
     {
-        public MsbMesh MsbMesh { get; }
-        public string Name
+        public MsbMeshViewModel(MsbMesh model, IEnumerable<MsbNodeViewModel> nodes, IEnumerable<MsbMeshViewModel> meshes, IEnumerable<MsbBoneViewModel> bones, IEnumerable<MsbAnimationViewModel> animations, CompositeObservableCollection<MsbElementViewModel> parentCollection) : base(model, nodes, meshes, bones, animations, parentCollection)
         {
-            get => MsbMesh.Name;
-            set => SetProperty(MsbMesh.Name, value, MsbMesh, (m, s) => m.Name = s);
-        }
-        public MsbMeshViewModel(MsbMesh msbMesh)
-        {
-            MsbMesh = msbMesh;
-        }
-        public override string ToString()
-        {
-            return Name;
         }
     }
 }
