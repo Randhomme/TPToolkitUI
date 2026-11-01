@@ -22,6 +22,7 @@ namespace TPToolkitUI.ViewModels
         public ObservableCollection<MsbMeshViewModel> Meshes { get; } = [];
         public ObservableCollection<MsbBoneViewModel> Bones { get; } = [];
         public ObservableCollection<MsbAnimationViewModel> Animations { get; } = [];
+        private readonly CompositeObservableCollection<MsbElementViewModel> msbElements;
 
         public AppSettings Settings { get; }
 
@@ -29,39 +30,40 @@ namespace TPToolkitUI.ViewModels
         {
             this.dialogService = dialogService;
             Settings = settings;
+            msbElements = new(Nodes, Meshes, Bones);
         }
 
         [RelayCommand]
         private void OnAddMsbNode()
         {
-            var elementName = dialogService.PromptMsbElementName(Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation));
+            var elementName = dialogService.PromptMsbElementName(Nodes, Meshes, Bones, Animations);
             if (elementName != null)
-                Nodes.Add(new(new(), Nodes, Meshes, Bones, Animations) { Name = elementName });
+                Nodes.Add(new(new(), Nodes, Meshes, Bones, Animations, msbElements) { Name = elementName });
         }
 
         [RelayCommand]
         private void OnAddMsbMesh()
         {
-            Meshes.Add(new(new()) { Name = TPGameTool.Meshes.FirstOrDefault() });
+            Meshes.Add(new(new(), Nodes, Meshes, Bones, Animations, msbElements) { Name = TPGameTool.Meshes.FirstOrDefault() });
         }
 
         [RelayCommand]
         private void OnAddMsbBone()
         {
-            var elementName = dialogService.PromptMsbElementName(Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation));
+            var elementName = dialogService.PromptMsbElementName(Nodes, Meshes, Bones, Animations);
             if (elementName != null)
-                Bones.Add(new(new(), Nodes, Meshes, Bones, Animations) { Name = elementName });
+                Bones.Add(new(new(), Nodes, Meshes, Bones, Animations, msbElements) { Name = elementName });
         }
 
         [RelayCommand]
         private void OnAddMsbAnimation()
         {
-            var elementName = dialogService.PromptMsbElementName(Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation));
+            var elementName = dialogService.PromptMsbElementName(Nodes, Meshes, Bones, Animations);
             if (elementName != null)
                 Animations.Add(new(new(), Nodes, Meshes, Bones, Animations) { Name = elementName });
         }
 
-        private string GenerateName(string prefix, params IEnumerable<MsbNamedElement>[] collections)
+        private string GenerateName(string prefix, params IEnumerable<IMsbNamedElement>[] collections)
         {
             string newPrefix = prefix;
             int i = newPrefix.Length - 1;
@@ -99,13 +101,13 @@ namespace TPToolkitUI.ViewModels
         {
             var msbScene = new MsbScene() { Name = msbSceneName };
             for (int i = 0; i < Nodes.Count; i++)
-                msbScene.MsbNodes.Add(Nodes[i].MsbNode);
+                msbScene.MsbNodes.Add(Nodes[i].Model);
             for (int i = 0; i < Meshes.Count; i++)
-                msbScene.MsbMeshes.Add(Meshes[i].MsbMesh);
+                msbScene.MsbMeshes.Add(Meshes[i].Model);
             for (int i = 0; i < Bones.Count; i++)
-                msbScene.MsbBones.Add(Bones[i].MsbBone);
+                msbScene.MsbBones.Add(Bones[i].Model);
             for (int i = 0; i < Animations.Count; i++)
-                msbScene.MsbAnimations.Add(Animations[i].MsbAnimation);
+                msbScene.MsbAnimations.Add(Animations[i].Model);
             msbScene.RootMsbElement = FindRootElement(msbScene);
             return msbScene;
         }
@@ -174,19 +176,19 @@ namespace TPToolkitUI.ViewModels
             for (int i = 0; i < msbNodesToBeAdded.Count; i++)
             {
                 var msbNode = msbNodesToBeAdded[i];
-                Nodes.Add(new(msbNode, Nodes, Meshes, Bones, Animations) { Name = GenerateName(msbNode.Name, Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation)) });
+                Nodes.Add(new(msbNode, Nodes, Meshes, Bones, Animations, msbElements) { Name = GenerateName(msbNode.Name, Nodes, Meshes, Bones, Animations) });
             }
             for (int i = 0; i < msbMeshesToBeAdded.Count; i++)
-                Meshes.Add(new(msbMeshesToBeAdded[i]));
+                Meshes.Add(new(msbMeshesToBeAdded[i], Nodes, Meshes, Bones, Animations, msbElements));
             for (int i = 0; i < msbBonesToBeAdded.Count; i++)
             {
                 var msbBone = msbBonesToBeAdded[i];
-                Bones.Add(new(msbBone, Nodes, Meshes, Bones, Animations) { Name = GenerateName(msbBone.Name, Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation)) });
+                Bones.Add(new(msbBone, Nodes, Meshes, Bones, Animations, msbElements) { Name = GenerateName(msbBone.Name, Nodes, Meshes, Bones, Animations) });
             }
             for (int i = 0; i < msbAnimationsToBeAdded.Count; i++)
             {
                 var msbAnimation = msbAnimationsToBeAdded[i];
-                Animations.Add(new(msbAnimation, Nodes, Meshes, Bones, Animations) { Name = GenerateName(msbAnimation.Name, Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation)) });
+                Animations.Add(new(msbAnimation, Nodes, Meshes, Bones, Animations) { Name = GenerateName(msbAnimation.Name, Nodes, Meshes, Bones, Animations) });
             }
             msbNodesToBeAdded.Clear();
             msbMeshesToBeAdded.Clear();
