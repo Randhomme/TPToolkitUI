@@ -1,19 +1,27 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.IO;
 using TPToolkitLib.Tools;
+using TPToolkitUI.Services;
+using TPToolkitUI.Services.Implementations;
 
 namespace TPToolkitUI.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
+        private readonly IDialogService dialogService;
         public AppSettings Settings { get; private set; } = new();
-
+        public MeshSceneViewModel MeshSceneViewModel { get; }
         public bool HasTPGameDirectory { get => !string.IsNullOrEmpty(Settings.TPGameDirectory); }
-
         public bool ExportLods
         {
             get => Settings.ExportLods;
             set => SetProperty(Settings.ExportLods, value, (b) => Settings.ExportLods = b);
+        }
+
+        public MainViewModel()
+        {
+            dialogService = new DialogService();
+            MeshSceneViewModel = new(dialogService, Settings);
         }
 
         public void LoadSettings()
