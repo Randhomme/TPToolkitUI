@@ -1,18 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TPToolkitLib.MeshScene.Classes;
+using TPToolkitUI.ViewModels.MeshScene;
 
 namespace TPToolkitUI.ViewModels
 {
     public partial class MsbElementNamePickerViewModel : ObservableObject
     {
-        private readonly IEnumerable<MsbNamedElement>[] existingElementsCollection;
+        private readonly IEnumerable<IMsbNamedElement>[] existingElementsCollection;
         public string? MsbElementName { get; private set; }
-        public MsbElementNamePickerViewModel(IEnumerable<MsbNamedElement>[] existingElementsCollection)
+        public MsbElementNamePickerViewModel(IEnumerable<IMsbNamedElement>[] existingElementsCollection)
         {
             this.existingElementsCollection = existingElementsCollection;
         }
