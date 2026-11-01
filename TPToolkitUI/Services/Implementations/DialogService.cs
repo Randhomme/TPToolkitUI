@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using TPToolkitLib.MeshScene.Classes;
 using TPToolkitUI.Dialogs;
 using TPToolkitUI.ViewModels;
+using TPToolkitUI.ViewModels.MeshScene;
 
 namespace TPToolkitUI.Services.Implementations
 {
@@ -19,7 +19,7 @@ namespace TPToolkitUI.Services.Implementations
             this.owner = owner;
         }
 
-        public string? PromptMsbElementName(params IEnumerable<MsbNamedElement>[] existingElementsCollection)
+        public string? PromptMsbElementName(params IEnumerable<IMsbNamedElement>[] existingElementsCollection)
         {
             var vm = new MsbElementNamePickerViewModel(existingElementsCollection);
             var dialog = new MsbElementNamePicker(owner) { DataContext = vm };
