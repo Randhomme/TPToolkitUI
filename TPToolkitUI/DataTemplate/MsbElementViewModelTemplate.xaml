@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:tools="clr-namespace:TPToolkitLib.Tools;assembly=TPToolkitLib"
+                    xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.MeshScene">
+    <DataTemplate DataType="{x:Type vm:MsbNodeViewModel}">
+        <StackPanel Margin="5">
+            <Label Margin="-5,0,0,0" Content="Name"/>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MsbMeshViewModel}">
+        <StackPanel Margin="5">
+            <Label Margin="-5,0,0,0" Content="Mesh"/>
+            <ComboBox ItemsSource="{x:Static tools:TPGameTool.Meshes}" SelectedItem="{Binding Name}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MsbBoneViewModel}">
+        <StackPanel Margin="5">
+            <Label Margin="-5,0,0,0" Content="Name"/>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MsbAnimationViewModel}">
+        <StackPanel Margin="5">
+            <Label Margin="-5,0,0,0" Content="Name"/>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>
