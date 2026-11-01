@@ -1,4 +1,4 @@
-﻿using TPToolkitLib.MeshScene.Classes;
+﻿using TPToolkitUI.ViewModels.MeshScene;
 
 namespace TPToolkitUI.Services
 {
@@ -9,6 +9,6 @@ namespace TPToolkitUI.Services
         /// </summary>
         /// <param name="existingElements">The IEnumerables to verify if the picked name is already taken</param>
         /// <returns>The name picked by the user, or null if the name is already taken.</returns>
-        public string? PromptMsbElementName(params IEnumerable<MsbNamedElement>[] existingElements);
+        public string? PromptMsbElementName(params IEnumerable<IMsbNamedElement>[] existingElements);
     }
 }
