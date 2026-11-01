@@ -13,7 +13,6 @@ namespace TPToolkitUI.ViewModels
     public partial class MeshSceneViewModel : ObservableObject
     {
         private readonly IDialogService dialogService;
-        //private readonly MsbScene msbScene = new();
         private IList<MsbNode> msbNodesToBeAdded = [];
         private IList<MsbMesh> msbMeshesToBeAdded = [];
         private IList<MsbBone> msbBonesToBeAdded = [];
@@ -30,10 +29,6 @@ namespace TPToolkitUI.ViewModels
         {
             this.dialogService = dialogService;
             Settings = settings;
-            //Nodes.SynchronizeTo(msbScene.MsbNodes);
-            //Meshes.SynchronizeTo(msbScene.MsbMeshes);
-            //Bones.SynchronizeTo(msbScene.MsbBones);
-            //Animations.SynchronizeTo(msbScene.MsbAnimations);
         }
 
         [RelayCommand]
@@ -41,7 +36,7 @@ namespace TPToolkitUI.ViewModels
         {
             var elementName = dialogService.PromptMsbElementName(Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation));
             if (elementName != null)
-                Nodes.Add(new(new()) { Name = elementName });
+                Nodes.Add(new(new(), Nodes, Meshes, Bones, Animations) { Name = elementName });
         }
 
         [RelayCommand]
@@ -55,7 +50,7 @@ namespace TPToolkitUI.ViewModels
         {
             var elementName = dialogService.PromptMsbElementName(Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation));
             if (elementName != null)
-                Bones.Add(new(new()) { Name = elementName });
+                Bones.Add(new(new(), Nodes, Meshes, Bones, Animations) { Name = elementName });
         }
 
         [RelayCommand]
@@ -63,7 +58,7 @@ namespace TPToolkitUI.ViewModels
         {
             var elementName = dialogService.PromptMsbElementName(Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation));
             if (elementName != null)
-                Animations.Add(new(new()) { Name = elementName });
+                Animations.Add(new(new(), Nodes, Meshes, Bones, Animations) { Name = elementName });
         }
 
         private string GenerateName(string prefix, params IEnumerable<MsbNamedElement>[] collections)
@@ -179,19 +174,19 @@ namespace TPToolkitUI.ViewModels
             for (int i = 0; i < msbNodesToBeAdded.Count; i++)
             {
                 var msbNode = msbNodesToBeAdded[i];
-                Nodes.Add(new(msbNode) { Name = GenerateName(msbNode.Name, Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation)) });
+                Nodes.Add(new(msbNode, Nodes, Meshes, Bones, Animations) { Name = GenerateName(msbNode.Name, Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation)) });
             }
             for (int i = 0; i < msbMeshesToBeAdded.Count; i++)
                 Meshes.Add(new(msbMeshesToBeAdded[i]));
             for (int i = 0; i < msbBonesToBeAdded.Count; i++)
             {
                 var msbBone = msbBonesToBeAdded[i];
-                Bones.Add(new(msbBone) { Name = GenerateName(msbBone.Name, Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation)) });
+                Bones.Add(new(msbBone, Nodes, Meshes, Bones, Animations) { Name = GenerateName(msbBone.Name, Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation)) });
             }
             for (int i = 0; i < msbAnimationsToBeAdded.Count; i++)
             {
                 var msbAnimation = msbAnimationsToBeAdded[i];
-                Animations.Add(new(msbAnimation) { Name = GenerateName(msbAnimation.Name, Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation)) });
+                Animations.Add(new(msbAnimation, Nodes, Meshes, Bones, Animations) { Name = GenerateName(msbAnimation.Name, Nodes.Select((e) => e.MsbNode), Meshes.Select((e) => e.MsbMesh), Bones.Select((e) => e.MsbBone), Animations.Select((e) => e.MsbAnimation)) });
             }
             msbNodesToBeAdded.Clear();
             msbMeshesToBeAdded.Clear();
