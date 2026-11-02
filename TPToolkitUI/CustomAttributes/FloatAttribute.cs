@@ -15,8 +15,8 @@ namespace TPToolkitUI.CustomAttributes
                 value.ToString(),
                 NumberStyles.Float,
                 CultureInfo.CurrentCulture,
-                out _
-            );
+                out var result
+            ) && !float.IsInfinity(result);
         }
 
         public FloatAttribute()
