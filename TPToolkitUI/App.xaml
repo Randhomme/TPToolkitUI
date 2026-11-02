@@ -12,6 +12,8 @@
                 <ResourceDictionary Source="/Styles/ScrollViewerStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/TextGroupBoxStyle.xaml"/>
                 <ResourceDictionary Source="/DataTemplate/MsbElementViewModelTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplate/MsbAttributeViewModelTemplate.xaml"/>
+                <ResourceDictionary Source="/Styles/SliderTextBoxControl.xaml"/>
                 <!--<ResourceDictionary Source="/Styles/MenuStyle.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
