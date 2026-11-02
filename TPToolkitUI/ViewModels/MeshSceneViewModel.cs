@@ -62,7 +62,7 @@ namespace TPToolkitUI.ViewModels
         {
             var elementName = dialogService.PromptMsbElementName(Nodes, Meshes, Bones, Animations);
             if (elementName != null)
-                Animations.Add(new(new(), Nodes, Meshes, Bones, Animations) { Name = elementName });
+                Animations.Add(new(new(), Nodes, Meshes, Bones, Animations, msbElements) { Name = elementName });
         }
 
         private string GenerateName(string prefix, params IEnumerable<IMsbNamedElement>[] collections)
@@ -190,31 +190,40 @@ namespace TPToolkitUI.ViewModels
             for (int i = 0; i < msbAnimationsToBeAdded.Count; i++)
             {
                 var msbAnimation = msbAnimationsToBeAdded[i];
-                Animations.Add(new(msbAnimation, Nodes, Meshes, Bones, Animations) { Name = GenerateName(msbAnimation.Name, Nodes, Meshes, Bones, Animations) });
+                Animations.Add(new(msbAnimation, Nodes, Meshes, Bones, Animations, msbElements) { Name = GenerateName(msbAnimation.Name, Nodes, Meshes, Bones, Animations) });
             }
             msbNodesToBeAdded.Clear();
             msbMeshesToBeAdded.Clear();
             msbBonesToBeAdded.Clear();
             msbAnimationsToBeAdded.Clear();
-            ResolveParents();
+            ResolveElements();
         }
 
-        private void ResolveParents()
+        private void ResolveElements()
         {
             for (int i = 0; i < Nodes.Count; i++)
             {
                 var node = Nodes[i];
-                node.ParentElement = msbElements.FirstOrDefault((p) => node.Model.Parent == p.Model);
+                node.ParentElement = msbElements.FirstOrDefault((e) => node.Model.Parent == e.Model);
             }
             for (int i = 0; i < Meshes.Count; i++)
             {
                 var mesh = Meshes[i];
-                mesh.ParentElement = msbElements.FirstOrDefault((p) => mesh.Model.Parent == p.Model);
+                mesh.ParentElement = msbElements.FirstOrDefault((e) => mesh.Model.Parent == e.Model);
             }
             for (int i = 0; i < Bones.Count; i++)
             {
                 var bone = Bones[i];
-                bone.ParentElement = msbElements.FirstOrDefault((p) => bone.Model.Parent == p.Model);
+                bone.ParentElement = msbElements.FirstOrDefault((e) => bone.Model.Parent == e.Model);
+            }
+            for (int i = 0; i < Animations.Count; i++)
+            {
+                var animation = Animations[i];
+                for(int j = 0; j < animation.MsbMotions.Count; j++)
+                {
+                    var msbMotion = animation.MsbMotions[j];
+                    msbMotion.MsbElement = msbElements.FirstOrDefault((e) => msbMotion.Model.MsbElement == e.Model);
+                }
             }
         }
     }
