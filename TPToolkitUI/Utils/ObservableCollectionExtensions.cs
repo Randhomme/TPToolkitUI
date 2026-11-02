@@ -15,27 +15,32 @@ namespace TPToolkitUI.Utils
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    var index1 = e.NewStartingIndex;
-                    foreach (T item in e.NewItems)
+                    for (int i = 0; i < e.NewItems.Count; i++)
                     {
-                        source.Insert(index1, item);
-                        index1++;
+                        source.Insert(e.NewStartingIndex + i, (T)e.NewItems[i]);
                     }
                     break;
+
                 case NotifyCollectionChangedAction.Remove:
-                    foreach (T item in e.OldItems)
-                        source.Remove(item);
+                    for (int i = 0; i < e.OldItems.Count; i++)
+                        source.RemoveAt(e.OldStartingIndex);
                     break;
+
                 case NotifyCollectionChangedAction.Replace:
-                    foreach (T item in e.OldItems)
-                        source.Remove(item);
-                    var index2 = e.NewStartingIndex;
-                    foreach (T item in e.NewItems)
+                    for (int i = 0; i < e.NewItems.Count; i++)
                     {
-                        source.Insert(index2, item);
-                        index2++;
+                        source[e.NewStartingIndex + i] =
+                            (T)e.NewItems[i];
                     }
                     break;
+
+                case NotifyCollectionChangedAction.Move:
+                    var item1 = source[e.OldStartingIndex];
+
+                    source.RemoveAt(e.OldStartingIndex);
+                    source.Insert(e.NewStartingIndex, item1);
+                    break;
+
                 case NotifyCollectionChangedAction.Reset:
                     source.Clear();
                     break;
