@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SharpGLTF.Schema2;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Xml.Linq;
 using TPToolkitLib.MeshScene.Classes;
 using TPToolkitLib.Tools;
 using TPToolkitUI.Services;
@@ -194,6 +196,26 @@ namespace TPToolkitUI.ViewModels
             msbMeshesToBeAdded.Clear();
             msbBonesToBeAdded.Clear();
             msbAnimationsToBeAdded.Clear();
+            ResolveParents();
+        }
+
+        private void ResolveParents()
+        {
+            for (int i = 0; i < Nodes.Count; i++)
+            {
+                var node = Nodes[i];
+                node.ParentElement = msbElements.FirstOrDefault((p) => node.Model.Parent == p.Model);
+            }
+            for (int i = 0; i < Meshes.Count; i++)
+            {
+                var mesh = Meshes[i];
+                mesh.ParentElement = msbElements.FirstOrDefault((p) => mesh.Model.Parent == p.Model);
+            }
+            for (int i = 0; i < Bones.Count; i++)
+            {
+                var bone = Bones[i];
+                bone.ParentElement = msbElements.FirstOrDefault((p) => bone.Model.Parent == p.Model);
+            }
         }
     }
 }
