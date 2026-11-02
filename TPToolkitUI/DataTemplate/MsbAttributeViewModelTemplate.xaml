@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.MeshScene"
+                    xmlns:enums="clr-namespace:TPToolkitLib.MeshScene.Enums;assembly=TPToolkitLib"
+                    xmlns:localEnums="clr-namespace:TPToolkitUI.Enums"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate DataType="{x:Type vm:MsbAttributeViewModel}">
+        <StackPanel Margin="5">
+            <Label Margin="-5,0,0,0" Content="Attribute name"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:AttributeName}" SelectedItem="{Binding AttributeName}"/>
+            <Label Margin="-5,5,0,0" Content="Descriptor name"/>
+            <TextBox Text="{Binding DescriptorName, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,29 +1,93 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:TPToolkitUI.Controls"
                     xmlns:tools="clr-namespace:TPToolkitLib.Tools;assembly=TPToolkitLib"
                     xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.MeshScene">
+    <StackPanel x:Key="MsbElementViewModelPosition" x:Shared="False">
+        <Label Margin="-5,5,0,0" Content="Pivot X"/>
+        <TextBox Text="{Binding PivotX, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        <Label Margin="-5,5,0,0" Content="Pivot Y"/>
+        <TextBox Text="{Binding PivotY, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        <Label Margin="-5,5,0,0" Content="Pivot Z"/>
+        <TextBox Text="{Binding PivotZ, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        <Label Margin="-5,5,0,0" Content="Position X"/>
+        <TextBox Text="{Binding PositionX, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        <Label Margin="-5,5,0,0" Content="Position Y"/>
+        <TextBox Text="{Binding PositionY, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        <Label Margin="-5,5,0,0" Content="Position Z"/>
+        <TextBox Text="{Binding PositionZ, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        <Label Margin="-5,5,0,0" Content="Rotation yaw"/>
+        <TextBox Text="{Binding RotationYaw, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        <Label Margin="-5,5,0,0" Content="Rotation pitch"/>
+        <TextBox Text="{Binding RotationPitch, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        <Label Margin="-5,5,0,0" Content="Rotation roll"/>
+        <TextBox Text="{Binding RotationRoll, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+    </StackPanel>
     <DataTemplate DataType="{x:Type vm:MsbNodeViewModel}">
-        <StackPanel Margin="5">
-            <Label Margin="-5,0,0,0" Content="Name"/>
-            <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
-        </StackPanel>
+        <TabControl>
+            <TabItem Header="Properties">
+                <ScrollViewer>
+                    <StackPanel Margin="5">
+                        <Label Margin="-5,0,0,0" Content="Name"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                        <Label Margin="-5,5,0,0" Content="Parent"/>
+                        <ComboBox ItemsSource="{Binding ParentCollection}" SelectedItem="{Binding ParentElement}" DisplayMemberPath="Name"/>
+                        <ContentPresenter Content="{StaticResource MsbElementViewModelPosition}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Attributes">
+                <controls:CollectionEditorControl ItemsSource="{Binding MsbAttributes}" AddCommand="{Binding AddMsbAttributeCommand}"/>
+            </TabItem>
+        </TabControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:MsbMeshViewModel}">
-        <StackPanel Margin="5">
-            <Label Margin="-5,0,0,0" Content="Mesh"/>
-            <ComboBox ItemsSource="{x:Static tools:TPGameTool.Meshes}" SelectedItem="{Binding Name}"/>
-        </StackPanel>
+        <TabControl>
+            <TabItem Header="Properties">
+                <ScrollViewer>
+                    <StackPanel Margin="5">
+                        <Label Margin="-5,0,0,0" Content="Mesh"/>
+                        <ComboBox ItemsSource="{x:Static tools:TPGameTool.Meshes}" SelectedItem="{Binding Name}"/>
+                        <Label Margin="-5,5,0,0" Content="Parent"/>
+                        <ComboBox ItemsSource="{Binding ParentCollection}" SelectedItem="{Binding ParentElement}" DisplayMemberPath="Name"/>
+                        <ContentPresenter Content="{StaticResource MsbElementViewModelPosition}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Attributes">
+                <controls:CollectionEditorControl ItemsSource="{Binding MsbAttributes}" AddCommand="{Binding AddMsbAttributeCommand}"/>
+            </TabItem>
+        </TabControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:MsbBoneViewModel}">
-        <StackPanel Margin="5">
-            <Label Margin="-5,0,0,0" Content="Name"/>
-            <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
-        </StackPanel>
+        
+        <TabControl>
+            <TabItem Header="Properties">
+                <ScrollViewer>
+                    <StackPanel Margin="5">
+                        <Label Margin="-5,0,0,0" Content="Name"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                        <Label Margin="-5,5,0,0" Content="Parent"/>
+                        <ComboBox ItemsSource="{Binding ParentCollection}" SelectedItem="{Binding ParentElement}" DisplayMemberPath="Name"/>
+                        <ContentPresenter Content="{StaticResource MsbElementViewModelPosition}"/>
+                        <Label Margin="-5,5,0,0" Content="Influence map name"/>
+                        <TextBox Text="{Binding InfluenceMapName, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                        <Label Margin="-5,5,0,0" Content="Rest length"/>
+                        <TextBox Text="{Binding RestLength, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Attributes">
+                <controls:CollectionEditorControl ItemsSource="{Binding MsbAttributes}" AddCommand="{Binding AddMsbAttributeCommand}"/>
+            </TabItem>
+        </TabControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:MsbAnimationViewModel}">
-        <StackPanel Margin="5">
-            <Label Margin="-5,0,0,0" Content="Name"/>
-            <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
-        </StackPanel>
+        <ScrollViewer>
+            <StackPanel Margin="5">
+                <Label Margin="-5,0,0,0" Content="Name"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+            </StackPanel>
+        </ScrollViewer>
     </DataTemplate>
 </ResourceDictionary>
