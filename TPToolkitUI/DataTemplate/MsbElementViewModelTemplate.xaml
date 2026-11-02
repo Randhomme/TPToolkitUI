@@ -83,11 +83,20 @@
         </TabControl>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:MsbAnimationViewModel}">
-        <ScrollViewer>
-            <StackPanel Margin="5">
-                <Label Margin="-5,0,0,0" Content="Name"/>
-                <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
-            </StackPanel>
-        </ScrollViewer>
+        <TabControl>
+            <TabItem Header="Properties">
+                <ScrollViewer>
+                    <StackPanel Margin="5">
+                        <Label Margin="-5,0,0,0" Content="Name"/>
+                        <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                        <Label Margin="-5,5,0,0" Content="Duration"/>
+                        <TextBox Text="{Binding Duration, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Motions">
+                <controls:CollectionEditorControl ItemsSource="{Binding MsbMotions}" AddCommand="{Binding AddMsbMotionCommand}"/>
+            </TabItem>
+        </TabControl>
     </DataTemplate>
 </ResourceDictionary>

@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.MeshScene"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate DataType="{x:Type vm:MsbKeyframeViewModel}">
+        <ScrollViewer>
+            <StackPanel Margin="5">
+                <Label Margin="-5,0,0,0" Content="Time"/>
+                <TextBox Text="{Binding Time, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                <Label Margin="-5,5,0,0" Content="Value"/>
+                <TextBox Text="{Binding Value, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                <Label Margin="-5,5,0,0" Content="Smoothing"/>
+                <TextBox Text="{Binding Smoothing, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                <Label Margin="-5,5,0,0" Content="Tension"/>
+                <TextBox Text="{Binding Tension, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                <Label Margin="-5,5,0,0" Content="Continuity"/>
+                <TextBox Text="{Binding Continuity, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                <Label Margin="-5,5,0,0" Content="Bias"/>
+                <TextBox Text="{Binding Bias, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                <Label Margin="-5,5,0,0" Content="Incoming tangent"/>
+                <TextBox Text="{Binding IncomingTangent, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+                <Label Margin="-5,5,0,0" Content="Outgoing tangent"/>
+                <TextBox Text="{Binding OutgoingTangent, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+            </StackPanel>
+        </ScrollViewer>
+    </DataTemplate>
+</ResourceDictionary>

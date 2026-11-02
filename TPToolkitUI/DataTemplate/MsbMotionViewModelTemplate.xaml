@@ -1,0 +1,35 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.MeshScene"
+                    xmlns:controls="clr-namespace:TPToolkitUI.Controls"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate DataType="{x:Type vm:MsbMotionViewModel}">
+        <TabControl>
+            <TabItem Header="Properties">
+                <ScrollViewer>
+                    <StackPanel Margin="5">
+                        <Label Margin="-5,0,0,0" Content="Target element"/>
+                        <ComboBox ItemsSource="{Binding AvailableElements}" SelectedItem="{Binding MsbElement}" DisplayMemberPath="Name"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Channel 1">
+                <controls:CollectionEditorControl ItemsSource="{Binding Channel1}" AddCommand="{Binding AddChannel1KeyframeCommand}"/>
+            </TabItem>
+            <TabItem Header="Channel 2">
+                <controls:CollectionEditorControl ItemsSource="{Binding Channel2}" AddCommand="{Binding AddChannel2KeyframeCommand}"/>
+            </TabItem>
+            <TabItem Header="Channel 3">
+                <controls:CollectionEditorControl ItemsSource="{Binding Channel3}" AddCommand="{Binding AddChannel3KeyframeCommand}"/>
+            </TabItem>
+            <TabItem Header="Channel 4">
+                <controls:CollectionEditorControl ItemsSource="{Binding Channel4}" AddCommand="{Binding AddChannel4KeyframeCommand}"/>
+            </TabItem>
+            <TabItem Header="Channel 5">
+                <controls:CollectionEditorControl ItemsSource="{Binding Channel5}" AddCommand="{Binding AddChannel5KeyframeCommand}"/>
+            </TabItem>
+            <TabItem Header="Channel 6">
+                <controls:CollectionEditorControl ItemsSource="{Binding Channel6}" AddCommand="{Binding AddChannel6KeyframeCommand}"/>
+            </TabItem>
+        </TabControl>
+    </DataTemplate>
+</ResourceDictionary>
