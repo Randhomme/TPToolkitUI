@@ -26,7 +26,7 @@ namespace TPToolkitUI.CustomAttributes
 
         public FloatAttribute()
         {
-            ErrorMessage = "The given number is not a valid float.";
+            ErrorMessage = "The given number is not a valid float number.";
         }
     }
 }
