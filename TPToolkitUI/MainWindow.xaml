@@ -24,7 +24,7 @@
         </Menu>
         <TabControl Grid.Row="1" Margin="0">
             <TabItem Header="Mesh">
-                <views:MeshView/>
+                <views:MeshView DataContext="{Binding MeshViewModel}"/>
             </TabItem>
             <TabItem Header="Mesh scene">
                 <views:MeshSceneView DataContext="{Binding MeshSceneViewModel}"/>

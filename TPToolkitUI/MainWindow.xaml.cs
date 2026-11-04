@@ -48,7 +48,7 @@ namespace TPToolkitUI
         }
 
         /// <summary>
-        /// Open AppSettingsDialog and start loading TPGame if needed
+        /// Open AppSettingsDialog and start loading TPGame after the window is closed if needed
         /// </summary>
         private void OpenAppSettingsDialog()
         {
