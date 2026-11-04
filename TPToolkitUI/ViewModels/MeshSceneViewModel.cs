@@ -39,7 +39,7 @@ namespace TPToolkitUI.ViewModels
         private void OnAddMsbNode()
         {
             var elementName = dialogService.PromptMsbElementName(Nodes, Meshes, Bones, Animations);
-            if (elementName != null)
+            if (!string.IsNullOrEmpty(elementName))
                 Nodes.Add(new(new(), Nodes, Meshes, Bones, Animations, msbElements) { Name = elementName });
         }
 
@@ -53,7 +53,7 @@ namespace TPToolkitUI.ViewModels
         private void OnAddMsbBone()
         {
             var elementName = dialogService.PromptMsbElementName(Nodes, Meshes, Bones, Animations);
-            if (elementName != null)
+            if (!string.IsNullOrEmpty(elementName))
                 Bones.Add(new(new(), Nodes, Meshes, Bones, Animations, msbElements) { Name = elementName });
         }
 
@@ -61,7 +61,7 @@ namespace TPToolkitUI.ViewModels
         private void OnAddMsbAnimation()
         {
             var elementName = dialogService.PromptMsbElementName(Nodes, Meshes, Bones, Animations);
-            if (elementName != null)
+            if (!string.IsNullOrEmpty(elementName))
                 Animations.Add(new(new(), Nodes, Meshes, Bones, Animations, msbElements) { Name = elementName });
         }
 
