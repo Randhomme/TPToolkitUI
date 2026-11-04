@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SharpGLTF.Schema2;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Xml.Linq;
 using TPToolkitLib.MeshScene.Classes;
 using TPToolkitLib.Tools;
 using TPToolkitUI.Services;
@@ -15,6 +13,7 @@ namespace TPToolkitUI.ViewModels
     public partial class MeshSceneViewModel : ObservableObject
     {
         private readonly IDialogService dialogService;
+        private readonly AppSettings settings;
         private IList<MsbNode> msbNodesToBeAdded = [];
         private IList<MsbMesh> msbMeshesToBeAdded = [];
         private IList<MsbBone> msbBonesToBeAdded = [];
@@ -26,13 +25,42 @@ namespace TPToolkitUI.ViewModels
         public ObservableCollection<MsbAnimationViewModel> Animations { get; } = [];
         private readonly CompositeObservableCollection<MsbElementViewModel> msbElements;
 
-        public AppSettings Settings { get; }
 
         public MeshSceneViewModel(IDialogService dialogService, AppSettings settings)
         {
             this.dialogService = dialogService;
-            Settings = settings;
+            this.settings = settings;
             msbElements = new(Nodes, Meshes, Bones);
+        }
+
+        [RelayCommand]
+        private void OnImportMeshScene()
+        {
+            var msbFilePaths = dialogService.BrowseFilesImport("Select your mesh scene files", "Mesh scene (.msb)|*.msb", ".msb", settings.LastMSBImportDirectory);
+            if (msbFilePaths.Length > 0)
+            {
+                settings.LastMSBImportDirectory = Path.GetDirectoryName(msbFilePaths[0]);
+                dialogService.StartAsyncWorkWithProgress((p, l) => ImportMeshScene(msbFilePaths, p, l), true, true);
+                UpdateCollections();
+            }
+        }
+
+        [RelayCommand]
+        private void OnExportMeshScene()
+        {
+            var msbFilePath = dialogService.BrowseFileExport("Save your mesh scene file", "Mesh scene (.msb)|*.msb", ".msb", settings.LastMSBExportDirectory);
+            if (!string.IsNullOrWhiteSpace(msbFilePath))
+            {
+                settings.LastMSBExportDirectory = Path.GetDirectoryName(msbFilePath);
+                dialogService.StartAsyncWorkWithProgress((p, l) => ExportMeshScene(msbFilePath, p, l), true, true);
+            }
+        }
+
+        [RelayCommand]
+        private void OnClearMeshScene()
+        {
+            if (dialogService.DisplayWarningWithConfirm("Clear mesh scene ?", "This will clear everything in the current mesh scene.\nDo you want to continue ?"))
+                ClearMeshScene();
         }
 
         [RelayCommand]
@@ -131,7 +159,7 @@ namespace TPToolkitUI.ViewModels
             return null;
         }
 
-        public void ImportMeshScene(string[] msbFilePaths, IProgress<string> progress, IProgress<string> logs)
+        private void ImportMeshScene(string[] msbFilePaths, IProgress<string> progress, IProgress<string> logs)
         {
             progress.Report("Importing mesh scene ...");
             try
@@ -150,7 +178,7 @@ namespace TPToolkitUI.ViewModels
             }
         }
 
-        public void ExportMeshScene(string msbFilePath, IProgress<string> progress, IProgress<string> logs)
+        private void ExportMeshScene(string msbFilePath, IProgress<string> progress, IProgress<string> logs)
         {
             progress.Report("Importing mesh scene ...");
             try
@@ -165,7 +193,7 @@ namespace TPToolkitUI.ViewModels
             }
         }
 
-        public void ClearMeshScene()
+        private void ClearMeshScene()
         {
             Nodes.Clear();
             Meshes.Clear();
@@ -173,7 +201,7 @@ namespace TPToolkitUI.ViewModels
             Animations.Clear();
         }
 
-        public void UpdateCollections()
+        private void UpdateCollections()
         {
             for (int i = 0; i < msbNodesToBeAdded.Count; i++)
             {

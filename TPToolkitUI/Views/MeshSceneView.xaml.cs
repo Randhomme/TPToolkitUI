@@ -1,8 +1,4 @@
-﻿using Microsoft.Win32;
-using System.Windows;
-using System.Windows.Controls;
-using TPToolkitUI.Dialogs;
-using TPToolkitUI.ViewModels;
+﻿using System.Windows.Controls;
 
 namespace TPToolkitUI.Views
 {
@@ -14,60 +10,6 @@ namespace TPToolkitUI.Views
         public MeshSceneView()
         {
             InitializeComponent();
-        }
-
-        // Import mesh scene
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var vm = (MeshSceneViewModel)DataContext;
-            var owner = Window.GetWindow(this);
-            var ofd = new OpenFileDialog()
-            {
-                Title = "Select your mesh scene file",
-                Multiselect = false,
-                Filter = "Mesh scene (.msb)|*.msb",
-                InitialDirectory = vm.Settings.LastMSBImportDirectory,
-            };
-            if (ofd.ShowDialog(owner) == true)
-            {
-                var pvm = new ProgressViewModel((p, l) =>
-                {
-                    vm.ImportMeshScene(ofd.FileNames, p, l);
-                });
-                new ProgressDialog(owner, pvm).Start(true, true);
-                vm.UpdateCollections();
-            }
-        }
-
-        // Export mesh scene
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            var vm = (MeshSceneViewModel)DataContext;
-            var owner = Window.GetWindow(this);
-            var ofd = new SaveFileDialog()
-            {
-                Title = "Save your mesh scene file",
-                Filter = "Mesh scene (.msb)|*.msb",
-                InitialDirectory = vm.Settings.LastMSBExportDirectory,
-            };
-            if (ofd.ShowDialog(owner) == true)
-            {
-                var pvm = new ProgressViewModel((p, l) =>
-                {
-                    vm.ExportMeshScene(ofd.FileName, p, l);
-                });
-                new ProgressDialog(owner, pvm).Start(true, true);
-            }
-        }
-
-        // Clear mesh scene
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            var vm = (MeshSceneViewModel)DataContext;
-            if (MessageBox.Show("This will clear everything in the current mesh scene.\nDo you want to continue ?", "Clear mesh scene ?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            {
-                vm.ClearMeshScene();
-            }
         }
     }
 }

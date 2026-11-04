@@ -13,9 +13,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="5">
-            <Button MinWidth="85" Margin="5" Content="Import" Click="Button_Click"/>
-            <Button MinWidth="85" Margin="5" Content="Export" Click="Button_Click_1"/>
-            <Button MinWidth="85" Margin="5" Content="Clear" Click="Button_Click_2"/>
+            <Button MinWidth="85" Margin="5" Content="Import" Command="{Binding ImportMeshSceneCommand}"/>
+            <Button MinWidth="85" Margin="5" Content="Export" Command="{Binding ExportMeshSceneCommand}"/>
+            <Button MinWidth="85" Margin="5" Content="Clear" Command="{Binding ClearMeshSceneCommand}"/>
         </StackPanel>
         <TabControl Grid.Row="1">
             <TabItem Header="Nodes">
