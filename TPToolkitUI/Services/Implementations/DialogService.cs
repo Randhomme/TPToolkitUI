@@ -109,5 +109,15 @@ namespace TPToolkitUI.Services.Implementations
             else
                 return null;
         }
+
+        public bool OpenAppSettings(AppSettings settings)
+        {
+            return new AppSettingsDialog(owner, new(settings)).ShowDialog() == true;
+        }
+
+        public void DisplayWarning(string title, string message)
+        {
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
     }
 }

@@ -58,6 +58,20 @@ namespace TPToolkitUI.Services
         /// <returns></returns>
         public string BrowseDirectoryExport(string title, string initialDirectory);
 
+        /// <summary>
+        /// Asks the user to pick a 3D file format.
+        /// </summary>
+        /// <param name="defaultFormat">The format selected by default.</param>
+        /// <returns>The format selected by the user.</returns>
         public File3DFormat? PromptFile3DFormat(File3DFormat defaultFormat);
+
+        /// <summary>
+        /// Open the specified settings for modification.
+        /// </summary>
+        /// <param name="settings">The settings to modify.</param>
+        /// <returns>The dialog result.</returns>
+        public bool OpenAppSettings(AppSettings settings);
+
+        public void DisplayWarning(string title, string message);
     }
 }
