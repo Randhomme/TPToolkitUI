@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using System.Security.Cryptography;
 using System.Windows;
 using TPToolkitUI.Dialogs;
 using TPToolkitUI.Enums;
@@ -118,6 +117,14 @@ namespace TPToolkitUI.Services.Implementations
         public void DisplayWarning(string title, string message)
         {
             MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        public bool DisplayWarningWithConfirm(string title, string message, bool okCancel = false)
+        {
+            if (okCancel)
+                return MessageBox.Show(message, title, MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK;
+            else
+                return MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
         }
     }
 }

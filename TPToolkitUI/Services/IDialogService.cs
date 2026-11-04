@@ -72,6 +72,20 @@ namespace TPToolkitUI.Services
         /// <returns>The dialog result.</returns>
         public bool OpenAppSettings(AppSettings settings);
 
+        /// <summary>
+        /// Display a titled warning.
+        /// </summary>
+        /// <param name="title">The title of the warning.</param>
+        /// <param name="message">The warning message.</param>
         public void DisplayWarning(string title, string message);
+
+        /// <summary>
+        /// Display a titled warning, and asks for a "Yes / No" confirmation.
+        /// </summary>
+        /// <param name="title">The title of the warning.</param>
+        /// <param name="message">The warning message.</param>
+        /// <param name="okCancel">Use an "Ok / Cancel" confirmation instead of "Yes / No"</param>
+        /// <returns>Whether the user confirmed or not.</returns>
+        public bool DisplayWarningWithConfirm(string title, string message, bool okCancel = false);
     }
 }
