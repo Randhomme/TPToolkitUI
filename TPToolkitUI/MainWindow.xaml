@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <Menu Padding="5,0">
             <MenuItem Header="App">
-                <MenuItem Header="Settings" Click="AppSettingsMenuItem_Click"/>
+                <MenuItem Header="Settings" Command="{Binding SettingsMenuCommand}"/>
                 <MenuItem Header="About"/>
             </MenuItem>
         </Menu>

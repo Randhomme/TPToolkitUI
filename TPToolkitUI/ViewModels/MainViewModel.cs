@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using TPToolkitLib.Tools;
 using TPToolkitUI.Services;
 using TPToolkitUI.Services.Implementations;
@@ -11,7 +12,6 @@ namespace TPToolkitUI.ViewModels
         public AppSettings Settings { get; private set; } = new();
         public MeshViewModel MeshViewModel { get; }
         public MeshSceneViewModel MeshSceneViewModel { get; }
-        public bool HasTPGameDirectory { get => !string.IsNullOrEmpty(Settings.TPGameDirectory); }
 
         public MainViewModel()
         {
@@ -24,6 +24,13 @@ namespace TPToolkitUI.ViewModels
         {
             Settings.Load();
             MeshViewModel.RefreshExportLodsSetting();
+            if (string.IsNullOrWhiteSpace(Settings.TPGameDirectory))
+            {
+                dialogService.DisplayWarning("TPGame directory", "You should set the TPGame directory in the app settings first.");
+                OnEditAppSettings();
+            }
+            else
+                dialogService.StartAsyncWorkWithProgress(LoadTPGame, true, false);
         }
 
         public void SaveSettings()
@@ -44,6 +51,14 @@ namespace TPToolkitUI.ViewModels
                 progressLogs.Report(ex.Message);
                 progress.Report("Fail to load TPGame folder");
             }
+        }
+
+        [RelayCommand]
+        public void OnEditAppSettings()
+        {
+            var tpGameDirectoryBefore = Settings.TPGameDirectory;
+            if (dialogService.OpenAppSettings(Settings) && !string.Equals(tpGameDirectoryBefore, Settings.TPGameDirectory))
+                dialogService.StartAsyncWorkWithProgress(LoadTPGame, true, true);
         }
     }
 }

@@ -19,12 +19,36 @@ namespace TPToolkitUI
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
             InitializeComponent();
             vm = (MainViewModel)DataContext;
-            vm.LoadSettings();
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             Title = $"{Title} v{version.Major}.{version.Minor}.{version.Build}";
         }
 
         #region Util methods
+
+        private void DisplayNewUpdate()
+        {
+            #if !DEBUG //Don't check for updates in debug mode
+                var local = new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
+                var latest = await GetLatestGitHubVersionAsync();
+                if (latest != null && latest > local)
+                {
+                    if (MessageBox.Show(
+                        $"A new update is available (v{latest}).\n" +
+                        "Do you want to check it out ?",
+                        "Update available",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Information
+                    ) == MessageBoxResult.Yes)
+                    {
+                        Process.Start(new ProcessStartInfo
+                        {
+                            FileName = "https://github.com/Randhomme/TPToolkitUI/releases/latest",
+                            UseShellExecute = true
+                        });
+                    }
+                }
+            #endif
+        }
 
         /// <summary>
         /// Check for a new release
@@ -47,63 +71,14 @@ namespace TPToolkitUI
             catch { return null; }
         }
 
-        /// <summary>
-        /// Open AppSettingsDialog and start loading TPGame after the window is closed if needed
-        /// </summary>
-        private void OpenAppSettingsDialog()
-        {
-            var appSettingsVm = new AppSettingsViewModel(vm.Settings);
-            if (new AppSettingsDialog(this, appSettingsVm).ShowDialog() == true && appSettingsVm.HasTPGameDirectoryChanged)
-            {
-                new ProgressDialog(this, new(vm.LoadTPGame)).Start(true, true);
-            }
-        }
-
-        #endregion
-
-        #region Menu events
-
-        private void AppSettingsMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            OpenAppSettingsDialog();
-        }
-
         #endregion
 
         #region Window events
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            if (vm.HasTPGameDirectory)
-            {
-                new ProgressDialog(this, new(vm.LoadTPGame)).Start(true, false);
-            }
-            else
-            {
-                MessageBox.Show("Set the TPGame directory in the app settings first.");
-                OpenAppSettingsDialog();
-            }
-            #if !DEBUG //Don't check for updates in debug mode
-                var local = new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
-                var latest = await GetLatestGitHubVersionAsync();
-                if (latest != null && latest > local)
-                {
-                    if (MessageBox.Show(
-                        $"A new update is available (v{latest}).\n" +
-                        "Do you want to check it out ?",
-                        "Update available",
-                        MessageBoxButton.YesNo,
-                        MessageBoxImage.Information
-                    ) == MessageBoxResult.Yes)
-                    {
-                        Process.Start(new ProcessStartInfo
-                        {
-                            FileName = "https://github.com/Randhomme/TPToolkitUI/releases/latest",
-                            UseShellExecute = true
-                        });
-                    }
-                }
-            #endif
+            vm.LoadSettings();
+            DisplayNewUpdate();
         }
 
         private void Window_Closed(object sender, EventArgs e)
