@@ -16,20 +16,28 @@ namespace TPToolkitUI
         public string Last3DFileImportDirectory { get; set; } = string.Empty;
         public string Last3DFileExportDirectory { get; set; } = string.Empty;
         public File3DFormat Prefered3DFileFormat { get; set; } = File3DFormat.glb;
-        public AppSettings Load()
+        public void Load()
         {
             try
             {
                 using (var reader = new StreamReader(File.OpenRead(filename)))
                 {
                     var xmls = new XmlSerializer(typeof(AppSettings));
-                    return (AppSettings)xmls.Deserialize(reader);
+                    var newSettings = (AppSettings)xmls.Deserialize(reader);
+                    TPGameDirectory = newSettings.TPGameDirectory;
+                    ExportLods = newSettings.ExportLods;
+                    LastMDBImportDirectory = newSettings.LastMDBImportDirectory;
+                    LastMDBExportDirectory = newSettings.LastMDBExportDirectory;
+                    LastMSBImportDirectory = newSettings.LastMSBImportDirectory;
+                    LastMSBExportDirectory = newSettings.LastMSBExportDirectory;
+                    Last3DFileImportDirectory = newSettings.Last3DFileImportDirectory;
+                    Last3DFileExportDirectory = newSettings.Last3DFileExportDirectory;
+                    Prefered3DFileFormat = newSettings.Prefered3DFileFormat;
                 }
             }
             catch
             {
                 Save();
-                return this;
             }
         }
 
