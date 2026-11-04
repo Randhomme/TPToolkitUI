@@ -6,13 +6,19 @@ namespace TPToolkitUI.ViewModels
     public partial class MsbElementNamePickerViewModel : ObservableObject
     {
         private readonly IEnumerable<IMsbNamedElement>[] existingElementsCollection;
-        public string? MsbElementName { get; private set; }
+        public string MsbElementName { get; private set; } = string.Empty;
         public MsbElementNamePickerViewModel(IEnumerable<IMsbNamedElement>[] existingElementsCollection)
         {
             this.existingElementsCollection = existingElementsCollection;
         }
 
-        public bool IsMsbElementNameValid(string name)
+        public void SetElementName(string name)
+        {
+            if (IsMsbElementNameValid(name))
+                MsbElementName = name;
+        }
+
+        private bool IsMsbElementNameValid(string name)
         {
             if (string.IsNullOrEmpty(name))
                 throw new("The name should not be empty.");
@@ -32,7 +38,6 @@ namespace TPToolkitUI.ViewModels
                         return true;
                 }
             }
-            MsbElementName = name;
             return false;
         }
     }

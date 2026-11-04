@@ -18,7 +18,7 @@ namespace TPToolkitUI.Dialogs
             var vm = (MsbElementNamePickerViewModel)DataContext;
             try
             {
-                vm.IsMsbElementNameValid(MsbElementNameTextBox.Text);
+                vm.SetElementName(MsbElementNameTextBox.Text);
                 this.DialogResult = true;
             }
             catch(Exception ex)
