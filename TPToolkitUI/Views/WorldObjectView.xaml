@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="TPToolkitUI.Views.WorldObjectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:localEnums="clr-namespace:TPToolkitUI.Enums"
+             xmlns:local="clr-namespace:TPToolkitUI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <Button MinWidth="85" Margin="5" Content="Import" Command="{Binding ImportWorldObjectCommand}"/>
+            <Button MinWidth="85" Margin="5" Content="Export"/>
+        </StackPanel>
+        <TabControl Grid.Row="1">
+            <TabItem Header="AI entity">
+                <ScrollViewer>
+                    <StackPanel Margin="5">
+                        <Label Margin="-5,0,0,0" Content="Factory type"/>
+                        <ComboBox ItemsSource="{localEnums:EnumBindingSource localEnums:AiEntityFactory}" SelectedItem="{Binding AiEntityFactory}"/>
+                        <ContentControl Margin="0,5,0,0" Content="{Binding AiEntityDefinitionViewModel}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Render entity">
+                
+            </TabItem>
+            <TabItem Header="Physics">
+                
+            </TabItem>
+            <TabItem Header="Collision">
+                
+            </TabItem>
+            <TabItem Header="Custom info">
+                
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
