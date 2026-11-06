@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="/DataTemplate/MeshScene/MsbMotionViewModelTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplate/MeshScene/MsbKeyframeViewModelTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplate/WorldObject/AiEntityFactoriesViewModelTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplate/WorldObject/CollisionFactoriesViewModelTemplate.xaml"/>
                 <!--<ResourceDictionary Source="/Styles/MenuStyle.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

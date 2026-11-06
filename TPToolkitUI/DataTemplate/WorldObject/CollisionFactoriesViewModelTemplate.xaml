@@ -1,0 +1,71 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.WorldObject.CollisionFactories"
+                    xmlns:localEnums="clr-namespace:TPToolkitUI.Enums"
+                    xmlns:enums="clr-namespace:TPToolkitLib.Enums;assembly=TPToolkitLib"
+                    xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate DataType="{x:Type vm:BoundingRenderEntityViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Detection type"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:DetectionType}" SelectedItem="{Binding DetectionType}"/>
+            <Label Margin="-5,5,0,0" Content="Response type"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:ResponseType}" SelectedItem="{Binding ResponseType}"/>
+            <Label Margin="-5,5,0,0" Content="User defined sphere size"/>
+            <CheckBox IsChecked="{Binding UserDefinedSphereSize}" Content="{Binding UserDefinedSphereSize}"/>
+            <StackPanel Visibility="{c:Binding UserDefinedSphereSize}">
+                <Label Margin="-5,5,0,0" Content="Local position X"/>
+                <TextBox Text="{Binding LocalPositionX, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Local position Y"/>
+                <TextBox Text="{Binding LocalPositionY, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Local position Z"/>
+                <TextBox Text="{Binding LocalPositionZ, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Radius"/>
+                <TextBox Text="{Binding Radius, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+            <Label Margin="-5,5,0,0" Content="User defined bounding box extents"/>
+            <CheckBox IsChecked="{Binding UserDefinedBoundingBoxExtents}" Content="{Binding UserDefinedBoundingBoxExtents}"/>
+            <StackPanel Visibility="{c:Binding UserDefinedBoundingBoxExtents}">
+                <Label Margin="-5,5,0,0" Content="Min extents X"/>
+                <TextBox Text="{Binding MinExtentsX, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Min extents Y"/>
+                <TextBox Text="{Binding MinExtentsY, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Min extents Z"/>
+                <TextBox Text="{Binding MinExtentsZ, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Max extents X"/>
+                <TextBox Text="{Binding MaxExtentsX, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Max extents Y"/>
+                <TextBox Text="{Binding MaxExtentsY, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Max extents Z"/>
+                <TextBox Text="{Binding MaxExtentsZ, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:BoundingSphereViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Detection type"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:DetectionType}" SelectedItem="{Binding DetectionType}"/>
+            <Label Margin="-5,5,0,0" Content="Response type"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:ResponseType}" SelectedItem="{Binding ResponseType}"/>
+            <Label Margin="-5,5,0,0" Content="User defined sphere size"/>
+            <CheckBox IsChecked="{Binding UserDefinedSphereSize}" Content="{Binding UserDefinedSphereSize}"/>
+            <StackPanel Visibility="{c:Binding UserDefinedSphereSize}">
+                <Label Margin="-5,5,0,0" Content="Local position X"/>
+                <TextBox Text="{Binding LocalPositionX, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Local position Y"/>
+                <TextBox Text="{Binding LocalPositionY, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Local position Z"/>
+                <TextBox Text="{Binding LocalPositionZ, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Radius"/>
+                <TextBox Text="{Binding Radius, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PointViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Detection type"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:DetectionType}" SelectedItem="{Binding DetectionType}"/>
+            <Label Margin="-5,5,0,0" Content="Response type"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:ResponseType}" SelectedItem="{Binding ResponseType}"/>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>
