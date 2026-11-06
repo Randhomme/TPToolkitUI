@@ -12,12 +12,14 @@ namespace TPToolkitUI.ViewModels
         public AppSettings Settings { get; private set; } = new();
         public MeshViewModel MeshViewModel { get; }
         public MeshSceneViewModel MeshSceneViewModel { get; }
+        public WorldObjectViewModel WorldObjectViewModel { get; }
 
         public MainViewModel()
         {
             dialogService = new DialogService();
             MeshViewModel = new(dialogService, Settings);
             MeshSceneViewModel = new(dialogService, Settings);
+            WorldObjectViewModel = new(dialogService, Settings);
         }
 
         public void LoadSettings()
