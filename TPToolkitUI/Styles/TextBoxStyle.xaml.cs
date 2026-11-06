@@ -10,7 +10,7 @@ namespace TPToolkitUI.Styles
         private void TextBox_Error(object sender, ValidationErrorEventArgs e)
         {
             if (e.Action == ValidationErrorEventAction.Added)
-                MessageBox.Show(e.Error.Exception?.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(e.Error.Exception.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
         }
 
