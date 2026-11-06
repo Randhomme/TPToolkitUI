@@ -30,7 +30,7 @@
                 <views:MeshSceneView DataContext="{Binding MeshSceneViewModel}"/>
             </TabItem>
             <TabItem Header="World object">
-                
+                <views:WorldObjectView DataContext="{Binding WorldObjectViewModel}"/>
             </TabItem>
         </TabControl>
     </Grid>
