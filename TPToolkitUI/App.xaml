@@ -11,11 +11,12 @@
                 <ResourceDictionary Source="/Styles/DataGridStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ScrollViewerStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/TextGroupBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/SliderTextBoxControl.xaml"/>
                 <ResourceDictionary Source="/DataTemplate/MeshScene/MsbElementViewModelTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplate/MeshScene/MsbAttributeViewModelTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplate/MeshScene/MsbMotionViewModelTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplate/MeshScene/MsbKeyframeViewModelTemplate.xaml"/>
-                <ResourceDictionary Source="/Styles/SliderTextBoxControl.xaml"/>
+                <ResourceDictionary Source="/DataTemplate/WorldObject/AiEntityFactoriesViewModelTemplate.xaml"/>
                 <!--<ResourceDictionary Source="/Styles/MenuStyle.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
