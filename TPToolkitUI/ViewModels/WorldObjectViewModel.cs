@@ -4,10 +4,12 @@ using System.IO;
 using TPToolkitLib.Tools;
 using TPToolkitLib.WorldObject;
 using TPToolkitLib.WorldObject.Definitions.AiEntityFactories;
+using TPToolkitLib.WorldObject.Definitions.CollisionFactories;
 using TPToolkitUI.Enums;
 using TPToolkitUI.Services;
 using TPToolkitUI.ViewModels.WorldObject;
 using TPToolkitUI.ViewModels.WorldObject.AiEntityFactories;
+using TPToolkitUI.ViewModels.WorldObject.CollisionFactories;
 
 namespace TPToolkitUI.ViewModels
 {
@@ -20,6 +22,8 @@ namespace TPToolkitUI.ViewModels
 
         [ObservableProperty]
         public partial AiEntityFactory AiEntityFactory { get; set; }
+        [ObservableProperty]
+        public partial CollisionFactory CollisionFactory { get; set; }
         [ObservableProperty]
         public partial AiEntityDefinitionViewModel? AiEntityDefinitionViewModel { get; private set; }
         [ObservableProperty]
@@ -52,6 +56,20 @@ namespace TPToolkitUI.ViewModels
                     AiEntityFactory.SpaceObjectAI => new SpaceObjectAIViewModel(new(worldObjectTypeString)),
                     AiEntityFactory.VolcanoAI => new VolcanoAIViewModel(new(worldObjectTypeString)),
                     _ => null
+                };
+            }
+        }
+
+        partial void OnCollisionFactoryChanged(CollisionFactory value)
+        {
+            if (shouldUpdateViewModelsFromUI)
+            {
+                CollisionDefinitionViewModel = value switch
+                {
+                    CollisionFactory.BoundingRenderEntity => new BoundingRenderEntityViewModel(new(worldObjectTypeString)),
+                    CollisionFactory.BoundingSphere => new BoundingSphereViewModel(new(worldObjectTypeString)),
+                    CollisionFactory.Point => new PointViewModel(new(worldObjectTypeString)),
+                    _ => null,
                 };
             }
         }
@@ -124,6 +142,25 @@ namespace TPToolkitUI.ViewModels
                 default:
                     AiEntityDefinitionViewModel = null;
                     AiEntityFactory = AiEntityFactory.None;
+                    break;
+            }
+            switch (worldObjectType.CollisionDefinition)
+            {
+                case BoundingRenderEntity boundingRenderEntity:
+                    CollisionDefinitionViewModel = new BoundingRenderEntityViewModel(boundingRenderEntity);
+                    CollisionFactory = CollisionFactory.BoundingRenderEntity;
+                    break;
+                case BoundingSphere boundingSphere:
+                    CollisionDefinitionViewModel = new BoundingSphereViewModel(boundingSphere);
+                    CollisionFactory = CollisionFactory.BoundingSphere;
+                    break;
+                case Point point:
+                    CollisionDefinitionViewModel = new PointViewModel(point);
+                    CollisionFactory = CollisionFactory.Point;
+                    break;
+                default:
+                    CollisionDefinitionViewModel = null;
+                    CollisionFactory = CollisionFactory.None;
                     break;
             }
             shouldUpdateViewModelsFromUI = true;

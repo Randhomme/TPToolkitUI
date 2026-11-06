@@ -33,7 +33,13 @@
                 
             </TabItem>
             <TabItem Header="Collision">
-                
+                <ScrollViewer>
+                    <StackPanel Margin="5">
+                        <Label Margin="-5,0,0,0" Content="Factory type"/>
+                        <ComboBox ItemsSource="{localEnums:EnumBindingSource localEnums:CollisionFactory}" SelectedItem="{Binding CollisionFactory}"/>
+                        <ContentControl Margin="0,5,0,0" Content="{Binding CollisionDefinitionViewModel}"/>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Custom info">
                 
