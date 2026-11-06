@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.WorldObject.AiEntityFactories"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate DataType="{x:Type vm:DragonAIViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Default sight range"/>
+            <TextBox Text="{Binding DefaultSightRange, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:GunAIViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Is lobbing gun"/>
+            <CheckBox IsChecked="{Binding IsLobbingGun}" Content="{Binding IsLobbingGun}"/>
+            <Label Margin="-5,0,0,0" Content="Is minelayin gun"/>
+            <CheckBox IsChecked="{Binding IsMineLayingGun}" Content="{Binding IsMineLayingGun}"/>
+            <Label Margin="-5,0,0,0" Content="Is torpedo launcher gun"/>
+            <CheckBox IsChecked="{Binding IsTorpedoLauncherGun}" Content="{Binding IsTorpedoLauncherGun}"/>
+            <Label Margin="-5,0,0,0" Content="Is point defense gun"/>
+            <CheckBox IsChecked="{Binding IsPointDefenseGun}" Content="{Binding IsPointDefenseGun}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:IslandAIViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Default sight range"/>
+            <TextBox Text="{Binding DefaultSightRange, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MineAIViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Default sight range"/>
+            <TextBox Text="{Binding DefaultSightRange, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ShipAIViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Default sight range"/>
+            <TextBox Text="{Binding DefaultSightRange, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SpaceAnimalAIViewModel}"/>
+    <DataTemplate DataType="{x:Type vm:SpaceObjectAIViewModel}"/>
+    <DataTemplate DataType="{x:Type vm:VolcanoAIViewModel}"/>
+</ResourceDictionary>
