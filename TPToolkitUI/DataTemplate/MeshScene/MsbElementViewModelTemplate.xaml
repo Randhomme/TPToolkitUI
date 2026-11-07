@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:TPToolkitUI.Controls"
                     xmlns:tools="clr-namespace:TPToolkitLib.Tools;assembly=TPToolkitLib"
+                    xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
                     xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.MeshScene">
     <StackPanel x:Key="MsbElementViewModelPosition" x:Shared="False">
         <Label Margin="-5,5,0,0" Content="Pivot X"/>
@@ -30,8 +31,12 @@
                     <StackPanel Margin="5">
                         <Label Margin="-5,0,0,0" Content="Name"/>
                         <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
-                        <Label Margin="-5,5,0,0" Content="Parent"/>
-                        <ComboBox ItemsSource="{Binding ParentCollection}" SelectedItem="{Binding ParentElement}" DisplayMemberPath="Name"/>
+                        <Label Margin="-5,5,0,0" Content="Has parent"/>
+                        <CheckBox IsChecked="{Binding HasParentElement}" Content="{Binding HasParentElement}"/>
+                        <StackPanel Visibility="{c:Binding HasParentElement}">
+                            <Label Margin="-5,5,0,0" Content="Parent"/>
+                            <ComboBox ItemsSource="{Binding ParentCollection}" SelectedItem="{Binding ParentElement}" DisplayMemberPath="Name"/>
+                        </StackPanel>
                         <ContentPresenter Content="{StaticResource MsbElementViewModelPosition}"/>
                     </StackPanel>
                 </ScrollViewer>
@@ -48,8 +53,12 @@
                     <StackPanel Margin="5">
                         <Label Margin="-5,0,0,0" Content="Mesh"/>
                         <ComboBox ItemsSource="{x:Static tools:TPGameTool.Meshes}" SelectedItem="{Binding Name}"/>
-                        <Label Margin="-5,5,0,0" Content="Parent"/>
-                        <ComboBox ItemsSource="{Binding ParentCollection}" SelectedItem="{Binding ParentElement}" DisplayMemberPath="Name"/>
+                        <Label Margin="-5,5,0,0" Content="Has parent"/>
+                        <CheckBox IsChecked="{Binding HasParentElement}" Content="{Binding HasParentElement}"/>
+                        <StackPanel Visibility="{c:Binding HasParentElement}">
+                            <Label Margin="-5,5,0,0" Content="Parent"/>
+                            <ComboBox ItemsSource="{Binding ParentCollection}" SelectedItem="{Binding ParentElement}" DisplayMemberPath="Name"/>
+                        </StackPanel>
                         <ContentPresenter Content="{StaticResource MsbElementViewModelPosition}"/>
                     </StackPanel>
                 </ScrollViewer>
@@ -67,8 +76,12 @@
                     <StackPanel Margin="5">
                         <Label Margin="-5,0,0,0" Content="Name"/>
                         <TextBox Text="{Binding Name, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
-                        <Label Margin="-5,5,0,0" Content="Parent"/>
-                        <ComboBox ItemsSource="{Binding ParentCollection}" SelectedItem="{Binding ParentElement}" DisplayMemberPath="Name"/>
+                        <Label Margin="-5,5,0,0" Content="Has parent"/>
+                        <CheckBox IsChecked="{Binding HasParentElement}" Content="{Binding HasParentElement}"/>
+                        <StackPanel Visibility="{c:Binding HasParentElement}">
+                            <Label Margin="-5,5,0,0" Content="Parent"/>
+                            <ComboBox ItemsSource="{Binding ParentCollection}" SelectedItem="{Binding ParentElement}" DisplayMemberPath="Name"/>
+                        </StackPanel>
                         <ContentPresenter Content="{StaticResource MsbElementViewModelPosition}"/>
                         <Label Margin="-5,5,0,0" Content="Influence map name"/>
                         <TextBox Text="{Binding InfluenceMapName, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>

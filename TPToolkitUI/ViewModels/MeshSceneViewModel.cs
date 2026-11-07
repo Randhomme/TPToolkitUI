@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using TPToolkitLib.MeshScene.Classes;
 using TPToolkitLib.Tools;
@@ -31,6 +32,7 @@ namespace TPToolkitUI.ViewModels
             this.dialogService = dialogService;
             this.settings = settings;
             msbElements = new(Nodes, Meshes, Bones);
+            msbElements.CollectionChanged += MsbElements_CollectionChanged;
         }
 
         [RelayCommand]
@@ -91,6 +93,18 @@ namespace TPToolkitUI.ViewModels
             var elementName = dialogService.PromptMsbElementName(Nodes, Meshes, Bones, Animations);
             if (!string.IsNullOrEmpty(elementName))
                 Animations.Add(new(new(), Nodes, Meshes, Bones, Animations, msbElements) { Name = elementName });
+        }
+
+        private void MsbElements_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (MsbElementViewModel msbElement in msbElements)
+                {
+                    if (e.OldItems.Contains(msbElement.ParentElement))
+                        msbElement.HasParentElement = false;
+                }
+            }
         }
 
         private string GenerateName(string prefix, params IEnumerable<IMsbNamedElement>[] collections)
@@ -233,16 +247,19 @@ namespace TPToolkitUI.ViewModels
             {
                 var node = Nodes[i];
                 node.ParentElement = msbElements.FirstOrDefault((e) => node.Model.Parent == e.Model);
+                node.HasParentElement = node.ParentElement != null;
             }
             for (int i = 0; i < Meshes.Count; i++)
             {
                 var mesh = Meshes[i];
                 mesh.ParentElement = msbElements.FirstOrDefault((e) => mesh.Model.Parent == e.Model);
+                mesh.HasParentElement = mesh.ParentElement != null;
             }
             for (int i = 0; i < Bones.Count; i++)
             {
                 var bone = Bones[i];
                 bone.ParentElement = msbElements.FirstOrDefault((e) => bone.Model.Parent == e.Model);
+                bone.HasParentElement = bone.ParentElement != null;
             }
             for (int i = 0; i < Animations.Count; i++)
             {

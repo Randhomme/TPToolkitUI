@@ -88,6 +88,9 @@ namespace TPToolkitUI.ViewModels.MeshScene
         public CompositeObservableCollection<MsbElementViewModel> ParentCollection { get; }
 
         [ObservableProperty]
+        public partial bool HasParentElement { get; set; }
+
+        [ObservableProperty]
         public partial MsbElementViewModel? ParentElement { get; set; }
 
         [Float]
@@ -213,6 +216,14 @@ namespace TPToolkitUI.ViewModels.MeshScene
                     Model.MsbAttirbutes.Clear();
                     break;
             }
+        }
+
+        partial void OnHasParentElementChanged(bool value)
+        {
+            if (value)
+                ParentElement = ParentElement ?? ParentCollection.FirstOrDefault();
+            else
+                ParentElement = null;
         }
 
         partial void OnParentElementChanged(MsbElementViewModel? value)
