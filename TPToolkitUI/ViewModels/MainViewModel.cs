@@ -32,7 +32,10 @@ namespace TPToolkitUI.ViewModels
                 OnEditAppSettings();
             }
             else
+            {
                 dialogService.StartAsyncWorkWithProgress(LoadTPGame, true, false);
+                WorldObjectViewModel.RefreshCollections();
+            }
         }
 
         public void SaveSettings()
