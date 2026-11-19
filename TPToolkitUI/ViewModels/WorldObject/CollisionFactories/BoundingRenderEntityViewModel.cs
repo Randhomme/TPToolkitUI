@@ -45,7 +45,7 @@ namespace TPToolkitUI.ViewModels.WorldObject.CollisionFactories
             set => SetAndValidateProperty(Model.LocalPosition.Z.ToString(), value, Model, (m, s) => m.LocalPosition = new(m.LocalPosition.X, m.LocalPosition.Y, float.Parse(s)));
         }
 
-        [Float]
+        [Float(MinValue = 0)]
         public string Radius
         {
             get => Model.Radius.ToString("F6");
