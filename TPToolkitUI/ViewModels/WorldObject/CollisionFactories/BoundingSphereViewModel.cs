@@ -1,4 +1,4 @@
-﻿using TPToolkitLib.Enums;
+﻿using TPToolkitLib.WorldObject.Enums;
 using TPToolkitLib.WorldObject.Definitions.CollisionFactories;
 using TPToolkitUI.CustomAttributes;
 

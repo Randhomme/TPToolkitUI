@@ -1,4 +1,4 @@
-﻿using TPToolkitLib.Enums;
+﻿using TPToolkitLib.WorldObject.Enums;
 using TPToolkitLib.WorldObject.Definitions.CollisionFactories;
 
 namespace TPToolkitUI.ViewModels.WorldObject.CollisionFactories

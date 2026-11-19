@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.WorldObject.CollisionFactories"
                     xmlns:localEnums="clr-namespace:TPToolkitUI.Enums"
-                    xmlns:enums="clr-namespace:TPToolkitLib.Enums;assembly=TPToolkitLib"
+                    xmlns:enums="clr-namespace:TPToolkitLib.WorldObject.Enums;assembly=TPToolkitLib"
                     xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DataTemplate DataType="{x:Type vm:BoundingRenderEntityViewModel}">
