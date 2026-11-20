@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Xml.Linq;
 
 namespace TPToolkitUI.CustomAttributes
 {
