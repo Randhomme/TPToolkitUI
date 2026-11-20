@@ -34,6 +34,8 @@ namespace TPToolkitUI
                     LastMSBExportDirectory = newSettings.LastMSBExportDirectory;
                     Last3DFileImportDirectory = newSettings.Last3DFileImportDirectory;
                     Last3DFileExportDirectory = newSettings.Last3DFileExportDirectory;
+                    LastWorldObjectImportDirectory = newSettings.LastWorldObjectImportDirectory;
+                    LastWorldObjectExportDirectory = newSettings.LastWorldObjectExportDirectory;
                     Prefered3DFileFormat = newSettings.Prefered3DFileFormat;
                 }
             }
