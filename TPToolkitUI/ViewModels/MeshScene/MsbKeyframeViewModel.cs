@@ -25,7 +25,7 @@ namespace TPToolkitUI.ViewModels.MeshScene
         [Int]
         public string Smoothing
         {
-            get => Model.Smoothing.ToString("F6");
+            get => Model.Smoothing.ToString();
             set => SetAndValidateProperty(Model.Smoothing.ToString(), value, Model, (m, s) => m.Smoothing = int.Parse(s));
         }
 
