@@ -20,7 +20,7 @@
   <ItemGroup>
     <PackageReference Include="CalcBinding" Version="2.5.2" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
-	<PackageReference Include="Randhomme.TPToolkitLib" Version="1.2.0" />
+	<PackageReference Include="Randhomme.TPToolkitLib" Version="1.2.1" />
 	<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.48">
 		<PrivateAssets>all</PrivateAssets>
 		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
