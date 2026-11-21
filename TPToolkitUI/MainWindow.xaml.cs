@@ -1,8 +1,8 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 using System.Net.Http;
 using System.Reflection;
 using System.Windows;
-using TPToolkitUI.Dialogs;
 using TPToolkitUI.ViewModels;
 
 namespace TPToolkitUI
@@ -25,51 +25,7 @@ namespace TPToolkitUI
 
         #region Util methods
 
-        private void DisplayNewUpdate()
-        {
-            #if !DEBUG //Don't check for updates in debug mode
-                var local = new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
-                var latest = await GetLatestGitHubVersionAsync();
-                if (latest != null && latest > local)
-                {
-                    if (MessageBox.Show(
-                        $"A new update is available (v{latest}).\n" +
-                        "Do you want to check it out ?",
-                        "Update available",
-                        MessageBoxButton.YesNo,
-                        MessageBoxImage.Information
-                    ) == MessageBoxResult.Yes)
-                    {
-                        Process.Start(new ProcessStartInfo
-                        {
-                            FileName = "https://github.com/Randhomme/TPToolkitUI/releases/latest",
-                            UseShellExecute = true
-                        });
-                    }
-                }
-            #endif
-        }
-
-        /// <summary>
-        /// Check for a new release
-        /// </summary>
-        /// <returns></returns>
-        private async Task<Version?> GetLatestGitHubVersionAsync()
-        {
-            try
-            {
-                var url = "https://github.com/Randhomme/TPToolkitUI/releases/latest";
-
-                using var client = new HttpClient();
-                client.DefaultRequestHeaders.Add("User-Agent", "request");
-
-                var response = await client.GetAsync(url);
-                var finalUrl = response.RequestMessage.RequestUri.ToString();
-                var tag = finalUrl.Split('/').Last().TrimStart('v');
-                return Version.TryParse(tag, out var version) ? version : null;
-            }
-            catch { return null; }
-        }
+        
 
         #endregion
 
@@ -78,7 +34,7 @@ namespace TPToolkitUI
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             vm.LoadSettings();
-            DisplayNewUpdate();
+            vm.DisplayNewUpdateAsync();
         }
 
         private void Window_Closed(object sender, EventArgs e)
