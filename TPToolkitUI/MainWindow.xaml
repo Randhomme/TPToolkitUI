@@ -19,6 +19,9 @@
         <Menu Padding="5,0">
             <MenuItem Header="App">
                 <MenuItem Header="Settings" Command="{Binding EditAppSettingsCommand}"/>
+                <MenuItem Header="Reload">
+                    <MenuItem Header="Reload all" Command="{Binding ReloadTPGameCommand}"/>
+                </MenuItem>
                 <MenuItem Header="About"/>
             </MenuItem>
         </Menu>

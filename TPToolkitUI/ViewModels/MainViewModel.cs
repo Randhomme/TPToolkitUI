@@ -43,7 +43,25 @@ namespace TPToolkitUI.ViewModels
             Settings.Save();
         }
 
-        public void LoadTPGame(IProgress<string> progress, IProgress<string> progressLogs)
+        [RelayCommand]
+        private void OnEditAppSettings()
+        {
+            var tpGameDirectoryBefore = Settings.TPGameDirectory;
+            if (dialogService.OpenAppSettings(Settings) && !string.Equals(tpGameDirectoryBefore, Settings.TPGameDirectory))
+            {
+                dialogService.StartAsyncWorkWithProgress(ReloadTPGame, true, true);
+                AppSettings.RefreshCollections();
+            }
+        }
+
+        [RelayCommand]
+        private void OnReloadTPGame()
+        {
+            dialogService.StartAsyncWorkWithProgress(ReloadTPGame, true, true);
+            AppSettings.RefreshCollections();
+        }
+
+        private void LoadTPGame(IProgress<string> progress, IProgress<string> progressLogs)
         {
             progress.Report("Loading TPGame folder ...");
             try
@@ -58,12 +76,19 @@ namespace TPToolkitUI.ViewModels
             }
         }
 
-        [RelayCommand]
-        public void OnEditAppSettings()
+        private void ReloadTPGame(IProgress<string> progress, IProgress<string> progressLogs)
         {
-            var tpGameDirectoryBefore = Settings.TPGameDirectory;
-            if (dialogService.OpenAppSettings(Settings) && !string.Equals(tpGameDirectoryBefore, Settings.TPGameDirectory))
-                dialogService.StartAsyncWorkWithProgress(LoadTPGame, true, true);
+            progress.Report("Reloading TPGame folder ...");
+            try
+            {
+                TPGameTool.ReloadTPGameFolder(Settings.TPGameDirectory);
+                progress.Report("TPGame folder reloaded successfully !");
+            }
+            catch (Exception ex)
+        {
+                progressLogs.Report(ex.Message);
+                progress.Report("Fail to reload TPGame folder");
+            }
         }
     }
 }
