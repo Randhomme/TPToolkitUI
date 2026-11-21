@@ -22,6 +22,46 @@ namespace TPToolkitUI.ViewModels
             WorldObjectViewModel = new(dialogService, Settings);
         }
 
+        public async void DisplayNewUpdateAsync()
+        {
+            #if !DEBUG //Don't check for updates in debug mode
+                var local = new Version(FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion);
+                var latest = await GetLatestGitHubVersionAsync();
+                if (latest != null && latest > local)
+                {
+                    if (dialogService.DisplayInformationWithConfirm("Update available", $"A new update is available (v{latest}).\nDo you want to check it out ?"))
+                    {
+                        Process.Start(new ProcessStartInfo
+                        {
+                            FileName = "https://github.com/Randhomme/TPToolkitUI/releases/latest",
+                            UseShellExecute = true
+                        });
+                    }
+                }
+            #endif
+        }
+
+        /// <summary>
+        /// Check for a new release
+        /// </summary>
+        /// <returns></returns>
+        private async Task<Version?> GetLatestGitHubVersionAsync()
+        {
+            try
+            {
+                var url = "https://github.com/Randhomme/TPToolkitUI/releases/latest";
+
+                using var client = new HttpClient();
+                client.DefaultRequestHeaders.Add("User-Agent", "request");
+
+                var response = await client.GetAsync(url);
+                var finalUrl = response.RequestMessage.RequestUri.ToString();
+                var tag = finalUrl.Split('/').Last().TrimStart('v');
+                return Version.TryParse(tag, out var version) ? version : null;
+            }
+            catch { return null; }
+        }
+
         public void LoadSettings()
         {
             Settings.Load();
