@@ -126,5 +126,18 @@ namespace TPToolkitUI.Services.Implementations
             else
                 return MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes;
         }
+
+        public void DisplayInformation(string title, string message)
+        {
+            MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public bool DisplayInformationWithConfirm(string title, string message, bool okCancel = false)
+        {
+            if (okCancel)
+                return MessageBox.Show(message, title, MessageBoxButton.OKCancel, MessageBoxImage.Information) == MessageBoxResult.OK;
+            else
+                return MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes;
+        }
     }
 }

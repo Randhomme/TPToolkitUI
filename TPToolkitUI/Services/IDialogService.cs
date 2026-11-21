@@ -87,5 +87,21 @@ namespace TPToolkitUI.Services
         /// <param name="okCancel">Use an "Ok / Cancel" confirmation instead of "Yes / No"</param>
         /// <returns>Whether the user confirmed or not.</returns>
         public bool DisplayWarningWithConfirm(string title, string message, bool okCancel = false);
+
+        /// <summary>
+        /// Display a titled information.
+        /// </summary>
+        /// <param name="title">The title of the warning.</param>
+        /// <param name="message">The warning message.</param>
+        public void DisplayInformation(string title, string message);
+
+        /// <summary>
+        /// Display a titled information, and asks for a "Yes / No" confirmation.
+        /// </summary>
+        /// <param name="title">The title of the warning.</param>
+        /// <param name="message">The warning message.</param>
+        /// <param name="okCancel">Use an "Ok / Cancel" confirmation instead of "Yes / No"</param>
+        /// <returns>Whether the user confirmed or not.</returns>
+        public bool DisplayInformationWithConfirm(string title, string message, bool okCancel = false);
     }
 }
