@@ -1,11 +1,24 @@
-﻿using System.IO;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Xml.Serialization;
+using TPToolkitLib.MeshScene.Classes;
+using TPToolkitLib.Tools;
+using TPToolkitLib.TPSettings;
+using TPToolkitLib.WorldObject;
+using TPToolkitLib.WorldObject.Definitions.CustomInfoFactories;
 using TPToolkitUI.Enums;
 
 namespace TPToolkitUI
 {
     public class AppSettings
     {
+        public static ObservableCollection<WorldObjectType> Asteroids { get; } = [];
+        public static ObservableCollection<string> Effects { get; } = [];
+        public static ObservableCollection<string> Meshes { get; } = [];
+        public static ObservableCollection<string> SoundDialogues { get; } = [];
+        public static ObservableCollection<string> SoundEffects { get; } = [];
+        public static ObservableCollection<TPGameHeaderStrings> TPGameHeaderStrings { get; } = [];
+
         private readonly string filename = "TPToolkitUI.xml";
         public string TPGameDirectory { get; set; } = string.Empty;
         public bool ExportLods { get; set; } = true;
@@ -56,6 +69,41 @@ namespace TPToolkitUI
                 }
             }
             catch { }
+        }
+
+        public static void RefreshCollections()
+        {
+            Asteroids.Clear();
+            Effects.Clear();
+            Meshes.Clear();
+            SoundDialogues.Clear();
+            SoundEffects.Clear();
+            TPGameHeaderStrings.Clear();
+            foreach (var item in TPGameTool.WorldObjects)
+            {
+                if (item.CustomInfoDefinition is AsteroidCustomInfoFactory)
+                    Asteroids.Add(item);
+            }
+            foreach (var item in TPGameTool.Effects)
+            {
+                Effects.Add(item);
+            }
+            foreach (var item in TPGameTool.Meshes)
+            {
+                Meshes.Add(item);
+            }
+            foreach (var item in TPGameTool.SoundDialogues)
+            {
+                SoundDialogues.Add(item);
+            }
+            foreach (var item in TPGameTool.SoundEffects)
+            {
+                SoundEffects.Add(item);
+            }
+            foreach (var item in TPGameTool.TPGameHeaderStrings)
+            {
+                TPGameHeaderStrings.Add(item);
+            }
         }
     }
 }

@@ -76,7 +76,7 @@ namespace TPToolkitUI.ViewModels
         [RelayCommand]
         private void OnAddMsbMesh()
         {
-            Meshes.Add(new(new(), Nodes, Meshes, Bones, Animations, msbElements) { Name = TPGameTool.Meshes.FirstOrDefault() });
+            Meshes.Add(new(new(), Nodes, Meshes, Bones, Animations, msbElements) { Name = AppSettings.Meshes.FirstOrDefault() });
         }
 
         [RelayCommand]

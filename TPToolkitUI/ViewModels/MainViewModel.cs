@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Reflection;
 using TPToolkitLib.Tools;
 using TPToolkitUI.Services;
 using TPToolkitUI.Services.Implementations;
@@ -74,7 +77,7 @@ namespace TPToolkitUI.ViewModels
             else
             {
                 dialogService.StartAsyncWorkWithProgress(LoadTPGame, true, false);
-                WorldObjectViewModel.RefreshCollections();
+                AppSettings.RefreshCollections();
             }
         }
 
@@ -125,7 +128,7 @@ namespace TPToolkitUI.ViewModels
                 progress.Report("TPGame folder reloaded successfully !");
             }
             catch (Exception ex)
-        {
+            {
                 progressLogs.Report(ex.Message);
                 progress.Report("Fail to reload TPGame folder");
             }
