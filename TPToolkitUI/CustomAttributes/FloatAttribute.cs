@@ -26,6 +26,11 @@ namespace TPToolkitUI.CustomAttributes
                 return new(FormatErrorMessage(validationContext.DisplayName));
         }
 
+        public override string FormatErrorMessage(string name)
+        {
+            return string.Format(CultureInfo.CurrentCulture, ErrorMessage, MinValue, MaxValue);
+        }
+
         private string FormatRangeErrorMessage()
         {
             return string.Format(CultureInfo.CurrentCulture, RangeErrorMessage, MinValue, MaxValue);
@@ -33,7 +38,7 @@ namespace TPToolkitUI.CustomAttributes
 
         public FloatAttribute()
         {
-            ErrorMessage = "The given number is not a valid float.";
+            ErrorMessage = "The given value is not a valid float or is out of range.\nMinimum: {0}\nMaximum: {1}";
             RangeErrorMessage = "The given number is out of the valid range.\nMinimum: {0}\nMaximum: {1}";
         }
     }
