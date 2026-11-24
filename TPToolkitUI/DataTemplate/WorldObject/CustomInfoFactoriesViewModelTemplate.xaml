@@ -1,0 +1,920 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:local="clr-namespace:TPToolkitUI"
+                    xmlns:mainVm="clr-namespace:TPToolkitUI.ViewModels"
+                    xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.WorldObject.CustomInfoFactories"
+                    xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
+                    xmlns:globalEnums="clr-namespace:TPToolkitLib.Enums;assembly=TPToolkitLib"
+                    xmlns:enums="clr-namespace:TPToolkitLib.WorldObject.Enums;assembly=TPToolkitLib"
+                    xmlns:localEnums="clr-namespace:TPToolkitUI.Enums"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate DataType="{x:Type vm:AsteroidCustomInfoFactoryViewModel}">
+        <StackPanel>
+            <CheckBox Margin="0,5,0,0" IsChecked="{Binding HasWorldObjectToCreateUponDeath0}" Content="World object to create upon death 0"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasWorldObjectToCreateUponDeath0}" ItemsSource="{x:Static local:AppSettings.Asteroids}" SelectedItem="{Binding WorldObjectToCreateUponDeath0}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasWorldObjectToCreateUponDeath1}" Content="World object to create upon death 1"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasWorldObjectToCreateUponDeath1}" ItemsSource="{x:Static local:AppSettings.Asteroids}" SelectedItem="{Binding WorldObjectToCreateUponDeath1}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasWorldObjectToCreateUponDeath2}" Content="World object to create upon death 2"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasWorldObjectToCreateUponDeath2}" ItemsSource="{x:Static local:AppSettings.Asteroids}" SelectedItem="{Binding WorldObjectToCreateUponDeath2}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasWorldObjectToCreateUponDeath3}" Content="World object to create upon death 3"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasWorldObjectToCreateUponDeath3}" ItemsSource="{x:Static local:AppSettings.Asteroids}" SelectedItem="{Binding WorldObjectToCreateUponDeath3}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasWorldObjectToCreateUponDeath4}" Content="World object to create upon death 4"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasWorldObjectToCreateUponDeath4}" ItemsSource="{x:Static local:AppSettings.Asteroids}" SelectedItem="{Binding WorldObjectToCreateUponDeath4}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasWorldObjectToCreateUponDeath5}" Content="World object to create upon death 5"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasWorldObjectToCreateUponDeath5}" ItemsSource="{x:Static local:AppSettings.Asteroids}" SelectedItem="{Binding WorldObjectToCreateUponDeath5}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasWorldObjectToCreateUponDeath6}" Content="World object to create upon death 6"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasWorldObjectToCreateUponDeath6}" ItemsSource="{x:Static local:AppSettings.Asteroids}" SelectedItem="{Binding WorldObjectToCreateUponDeath6}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasWorldObjectToCreateUponDeath7}" Content="World object to create upon death 7"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasWorldObjectToCreateUponDeath7}" ItemsSource="{x:Static local:AppSettings.Asteroids}" SelectedItem="{Binding WorldObjectToCreateUponDeath7}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasWorldObjectToCreateUponDeath8}" Content="World object to create upon death 8"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasWorldObjectToCreateUponDeath8}" ItemsSource="{x:Static local:AppSettings.Asteroids}" SelectedItem="{Binding WorldObjectToCreateUponDeath8}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasWorldObjectToCreateUponDeath9}" Content="World object to create upon death 9"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasWorldObjectToCreateUponDeath9}" ItemsSource="{x:Static local:AppSettings.Asteroids}" SelectedItem="{Binding WorldObjectToCreateUponDeath9}"/>
+            <Label Margin="-5,5,0,0" Content="Explosion effect"/>
+            <ComboBox ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding ExplosionEffect}"/>
+            <Label Margin="-5,5,0,0" Content="Report spotting"/>
+            <CheckBox IsChecked="{Binding ReportSpotting}" Content="{Binding ReportSpotting}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:BlackHoleCustomInfoFactoryViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Magnitude"/>
+            <TextBox Text="{Binding Magnitude, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Radius"/>
+            <TextBox Text="{Binding Radius, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Vortex effect name"/>
+            <ComboBox Margin="0,0,0,0" ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding VortexEffectName}"/>
+            <Label Margin="-5,5,0,0" Content="Ambient sound max distance"/>
+            <TextBox Text="{Binding AmbientSoundMaxDistance, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasAmbientSoundName}" Content="Ambient sound"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasAmbientSoundName}" ItemsSource="{x:Static local:AppSettings.SoundDialogues}" SelectedItem="{Binding AmbientSoundName}"/>
+        </StackPanel>
+    </DataTemplate>
+    <ControlTemplate x:Key="BulletCustomInfoFactoryViewModelTemplate" TargetType="{x:Type ContentControl}">
+        <TabControl Margin="0,5,0,0">
+            <TabItem Header="Properties">
+                <StackPanel Margin="5">
+                    <ContentPresenter/>
+                    <Label Margin="-5,0,0,0" Content="Hit effect"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding HitEffect}"/>
+                    <Label Margin="-5,5,0,0" Content="Bullet effect"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding BulletEffect}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage hit points"/>
+                    <TextBox Text="{Binding DamageHitPoints, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Decal damage size"/>
+                    <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:DecalDamageSize}" SelectedItem="{Binding DecalDamageSize}"/>
+                    <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasLifetime}" Content="Lifetime"/>
+                    <TextBox Margin="0,5,0,0" Visibility="{c:Binding HasLifetime}" Text="{Binding Lifetime, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Damage">
+                <ContentControl Focusable="False" Content="{Binding DamagePotentialViewModel}"/>
+            </TabItem>
+            <TabItem Header="Sound">
+                <TabControl Margin="5">
+                    <TabItem Header="General">
+                        <StackPanel Margin="5">
+                            <Label Margin="-5,0,0,0" Content="Impact sound max distance"/>
+                            <TextBox Text="{Binding ImpactSoundMaxDistance, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                            <Label Margin="-5,5,0,0" Content="Impact sound volume"/>
+                            <TextBox Text="{Binding ImpactSoundVolume, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                            <Label Margin="-5,5,0,0" Content="Travel sound max distance"/>
+                            <TextBox Text="{Binding TravelSoundMaxDistance, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                            <Label Margin="-5,5,0,0" Content="Travel sound volume"/>
+                            <TextBox Text="{Binding TravelSoundVolume, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasTravelSound}" Content="Travel sound"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasTravelSound}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding TravelSound}"/>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Hull wood">
+                        <StackPanel Margin="5">
+                            <CheckBox Margin="0,5,0,0" IsChecked="{Binding HasRicochetSoundHullWood}" Content="Ricochet sound"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasRicochetSoundHullWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding RicochetSoundHullWood}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound0HullWood}" Content="Impact sound0"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound0HullWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound0HullWood}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound1HullWood}" Content="Impact sound1"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound1HullWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound1HullWood}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound2HullWood}" Content="Impact sound2"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound2HullWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound2HullWood}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound3HullWood}" Content="Impact sound3"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound3HullWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound3HullWood}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound4HullWood}" Content="Impact sound4"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound4HullWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound4HullWood}"/>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Hull reinforced wood">
+                        <StackPanel Margin="5">
+                            <CheckBox Margin="0,5,0,0" IsChecked="{Binding HasRicochetSoundHullReInforcedWood}" Content="Ricochet sound"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasRicochetSoundHullReInforcedWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding RicochetSoundHullReInforcedWood}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound0HullReInforcedWood}" Content="Impact sound0"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound0HullReInforcedWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound0HullReInforcedWood}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound1HullReInforcedWood}" Content="Impact sound1"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound1HullReInforcedWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound1HullReInforcedWood}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound2HullReInforcedWood}" Content="Impact sound2"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound2HullReInforcedWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound2HullReInforcedWood}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound3HullReInforcedWood}" Content="Impact sound3"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound3HullReInforcedWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound3HullReInforcedWood}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound4HullReInforcedWood}" Content="Impact sound4"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound4HullReInforcedWood}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound4HullReInforcedWood}"/>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Hull iron">
+                        <StackPanel Margin="5">
+                            <CheckBox Margin="0,5,0,0" IsChecked="{Binding HasRicochetSoundHullIron}" Content="Ricochet sound"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasRicochetSoundHullIron}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding RicochetSoundHullIron}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound0HullIron}" Content="Impact sound0"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound0HullIron}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound0HullIron}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound1HullIron}" Content="Impact sound1"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound1HullIron}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound1HullIron}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound2HullIron}" Content="Impact sound2"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound2HullIron}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound2HullIron}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound3HullIron}" Content="Impact sound3"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound3HullIron}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound3HullIron}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound4HullIron}" Content="Impact sound4"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound4HullIron}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound4HullIron}"/>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Sail cloth">
+                        <StackPanel Margin="5">
+                            <CheckBox Margin="0,5,0,0" IsChecked="{Binding HasRicochetSoundSailCloth}" Content="Ricochet sound"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasRicochetSoundSailCloth}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding RicochetSoundSailCloth}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound0SailCloth}" Content="Impact sound0"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound0SailCloth}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound0SailCloth}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound1SailCloth}" Content="Impact sound1"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound1SailCloth}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound1SailCloth}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound2SailCloth}" Content="Impact sound2"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound2SailCloth}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound2SailCloth}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound3SailCloth}" Content="Impact sound3"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound3SailCloth}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound3SailCloth}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound4SailCloth}" Content="Impact sound4"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound4SailCloth}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound4SailCloth}"/>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Wall stone">
+                        <StackPanel Margin="5">
+                            <CheckBox Margin="0,5,0,0" IsChecked="{Binding HasRicochetSoundWallStone}" Content="Ricochet sound"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasRicochetSoundWallStone}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding RicochetSoundWallStone}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound0WallStone}" Content="Impact sound0"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound0WallStone}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound0WallStone}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound1WallStone}" Content="Impact sound1"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound1WallStone}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound1WallStone}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound2WallStone}" Content="Impact sound2"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound2WallStone}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound2WallStone}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound3WallStone}" Content="Impact sound3"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound3WallStone}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound3WallStone}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound4WallStone}" Content="Impact sound4"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound4WallStone}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound4WallStone}"/>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Dragon scale">
+                        <StackPanel Margin="5">
+                            <CheckBox Margin="0,5,0,0" IsChecked="{Binding HasRicochetSoundDragonScale}" Content="Ricochet sound"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasRicochetSoundDragonScale}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding RicochetSoundDragonScale}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound0DragonScale}" Content="Impact sound0"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound0DragonScale}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound0DragonScale}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound1DragonScale}" Content="Impact sound1"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound1DragonScale}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound1DragonScale}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound2DragonScale}" Content="Impact sound2"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound2DragonScale}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound2DragonScale}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound3DragonScale}" Content="Impact sound3"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound3DragonScale}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound3DragonScale}"/>
+                            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasImpactSound4DragonScale}" Content="Impact sound4"/>
+                            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasImpactSound4DragonScale}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding ImpactSound4DragonScale}"/>
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+        </TabControl>
+    </ControlTemplate>
+    <DataTemplate DataType="{x:Type vm:BulletCustomInfoFactoryViewModel}">
+        <ContentControl Template="{StaticResource BulletCustomInfoFactoryViewModelTemplate}"/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:CrewCustomInfoFactoryViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Crew race"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource globalEnums:Race}" SelectedItem="{Binding CrewRace}"/>
+            <Label Margin="-5,5,0,0" Content="Point value"/>
+            <TextBox Text="{Binding PointValue, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Crew name string ID"/>
+            <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedCrewNameStringIDGameHeader}"/>
+            <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableCrewNameStringIDS}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding CrewNameStringID}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding GunnerySkillActive}" Content="Gunnery skill active"/>
+            <StackPanel Visibility="{c:Binding GunnerySkillActive}">
+                <Label Margin="-5,0,0,0" Content="Gunnery skill ability value"/>
+                <TextBox Text="{Binding GunnerySkillAbilityValue, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding LeadershipSkillActive}" Content="Leadership skill active"/>
+            <StackPanel Visibility="{c:Binding LeadershipSkillActive}">
+                <Label Margin="-5,0,0,0" Content="Leadership skill ability value"/>
+                <TextBox Text="{Binding LeadershipSkillAbilityValue, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding NavigationSkillActive}" Content="Navigation skill active"/>
+            <StackPanel Visibility="{c:Binding NavigationSkillActive}">
+                <Label Margin="-5,0,0,0" Content="Navigation skill ability value"/>
+                <TextBox Text="{Binding NavigationSkillAbilityValue, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding EngineeringSkillActive}" Content="Engineering skill active"/>
+            <StackPanel Visibility="{c:Binding EngineeringSkillActive}">
+                <Label Margin="-5,0,0,0" Content="Engineering skill ability value"/>
+                <TextBox Text="{Binding EngineeringSkillAbilityValue, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding RiggingSkillActive}" Content="Rigging skill active"/>
+            <StackPanel Visibility="{c:Binding RiggingSkillActive}">
+                <Label Margin="-5,0,0,0" Content="Rigging skill ability value"/>
+                <TextBox Text="{Binding RiggingSkillAbilityValue, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding SpottingSkillActive}" Content="Spotting skill active"/>
+            <StackPanel Visibility="{c:Binding SpottingSkillActive}">
+                <Label Margin="-5,0,0,0" Content="Spotting skill ability value"/>
+                <TextBox Text="{Binding SpottingSkillAbilityValue, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding CombatSkillActive}" Content="Combat skill active"/>
+            <StackPanel Visibility="{c:Binding CombatSkillActive}">
+                <Label Margin="-5,0,0,0" Content="Combat skill ability value"/>
+                <TextBox Text="{Binding CombatSkillAbilityValue, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+            <Label Margin="-5,5,0,0" Content="Talking head texture"/>
+            <ComboBox ItemsSource="{x:Static local:AppSettings.HudEntries}" SelectedItem="{Binding TalkingHeadTexture}"/>
+            <Label Margin="-5,5,0,0" Content="Species"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:Species}" SelectedItem="{Binding Species}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:DragonCustomInfoFactoryViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Selected indicator percentage of radius"/>
+            <TextBox Text="{Binding SelectedIndicatorPercentageOfRadius, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,0,0,0" Content="Distanceto start sphere picking"/>
+            <TextBox Text="{Binding DistancetoStartSpherePicking, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,0,0,0" Content="Shortest time between sounds"/>
+            <TextBox Text="{Binding ShortestTimeBetweenSounds, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,0,0,0" Content="Longest time between sounds"/>
+            <TextBox Text="{Binding LongestTimeBetweenSounds, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_0}" Content="Sound_0"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_0}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_0}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_1}" Content="Sound_1"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_1}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_1}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_2}" Content="Sound_2"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_2}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_2}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_3}" Content="Sound_3"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_3}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_3}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_4}" Content="Sound_4"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_4}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_4}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_5}" Content="Sound_5"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_5}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_5}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_6}" Content="Sound_6"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_6}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_6}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_7}" Content="Sound_7"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_7}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_7}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_8}" Content="Sound_8"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_8}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_8}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_9}" Content="Sound_9"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_9}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_9}"/>
+            <Label Margin="-5,5,0,0" Content="Sound distance"/>
+            <TextBox Text="{Binding SoundDistance, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:EnergyNetCustomInfoFactoryViewModel}">
+        <ContentControl Template="{StaticResource BulletCustomInfoFactoryViewModelTemplate}">
+            <StackPanel Margin="0,0,0,5">
+                <Label Margin="-5,0,0,0" Content="Duration"/>
+                <TextBox Text="{Binding Duration, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Percentage of energy dissipated"/>
+                <TextBox Text="{Binding PercentageOfEnergyDissipated, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+        </ContentControl>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:EtheriumCurrentCustomInfoFactoryViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Magnitude"/>
+            <TextBox Text="{Binding Magnitude, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Radius"/>
+            <TextBox Text="{Binding Radius, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:GrapplingHarpoonCustomInfoFactoryViewModel}">
+        <ContentControl Template="{StaticResource BulletCustomInfoFactoryViewModelTemplate}"/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:GravChargeCustomInfoFactoryViewModel}">
+        <ContentControl Template="{StaticResource BulletCustomInfoFactoryViewModelTemplate}">
+            <StackPanel Margin="0,0,0,5">
+                <Label Margin="-5,0,0,0" Content="Magnitude"/>
+                <TextBox Text="{Binding Magnitude, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Duration"/>
+                <TextBox Text="{Binding Duration, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Radius"/>
+                <TextBox Text="{Binding Radius, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+        </ContentControl>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:GunCustomInfoFactoryViewModel}">
+        <StackPanel>
+            <CheckBox Margin="0,10,0,0" IsChecked="{Binding HasBulletTypeName_Primary}" Content="Bullet type primary"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasBulletTypeName_Primary}" ItemsSource="{x:Static local:AppSettings.Bullets}" SelectedItem="{Binding BulletTypeName_Primary}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasBulletTypeName_Secondary}" Content="Bullet type secondary"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasBulletTypeName_Secondary}" ItemsSource="{x:Static local:AppSettings.Bullets}" SelectedItem="{Binding BulletTypeName_Secondary}"/>
+            <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSoundName}" Content="Sound name"/>
+            <StackPanel Visibility="{c:Binding HasSoundName}">
+                <ComboBox Margin="0,5,0,0" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding SoundName}"/>
+                <Label Margin="-5,5,0,0" Content="Sound max distance"/>
+                <TextBox Text="{Binding SoundMaxDistance, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Sound volume"/>
+                <TextBox Text="{Binding SoundVolume, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+            <Label Margin="-5,5,0,0" Content="Muzzle flash effect"/>
+            <ComboBox ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding MuzzleFlashEffect}"/>
+            <Label Margin="-5,5,0,0" Content="Muzzle speed"/>
+            <TextBox Text="{Binding MuzzleSpeed, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="During burst reload time"/>
+            <TextBox Text="{Binding DuringBurstReloadTime, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Bullets per burst"/>
+            <TextBox Text="{Binding BulletsPerBurst, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Time between bursts"/>
+            <TextBox Text="{Binding TimeBetweenBursts, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Calculate accuracy deviation during burst"/>
+            <CheckBox IsChecked="{Binding CalculateAccuracyDeviationDuringBurst}" Content="{Binding CalculateAccuracyDeviationDuringBurst}"/>
+            <Label Margin="-5,5,0,0" Content="Weapon bar icon texture"/>
+            <ComboBox ItemsSource="{x:Static local:AppSettings.HudEntries}" SelectedItem="{Binding WeaponBarIconTexture}"/>
+            <Label Margin="-5,5,0,0" Content="Vertical rotation speed"/>
+            <TextBox Text="{Binding VerticalRotationSpeed, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Horizontal rotation speed"/>
+            <TextBox Text="{Binding HorizontalRotationSpeed, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Vertical min angle"/>
+            <TextBox Text="{Binding VerticalMinAngle, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Vertical max angle"/>
+            <TextBox Text="{Binding VerticalMaxAngle, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Lob angle"/>
+            <TextBox Text="{Binding LobAngle, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Maximum range"/>
+            <TextBox Text="{Binding MaximumRange_Range, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Long range"/>
+            <TextBox Text="{Binding LongRange_Range, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Effective range"/>
+            <TextBox Text="{Binding EffectiveRange_Range, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Bullet affected by gravity"/>
+            <CheckBox IsChecked="{Binding BulletAffectedByGravity}" Content="{Binding BulletAffectedByGravity}"/>
+            <Label Margin="-5,5,0,0" Content="Maximum range accuracy deviation"/>
+            <TextBox Text="{Binding MaximumRange_AccuracyDeviation, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Long range accuracy deviation"/>
+            <TextBox Text="{Binding LongRange_AccuracyDeviation, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Effective range accuracy deviation"/>
+            <TextBox Text="{Binding EffectiveRange_AccuracyDeviation, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Maximum range ricochet factor"/>
+            <TextBox Text="{Binding MaximumRange_RicochetFactor, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Long range ricochet factor"/>
+            <TextBox Text="{Binding LongRange_RicochetFactor, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Effective range ricochet factor"/>
+            <TextBox Text="{Binding EffectiveRange_RicochetFactor, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Gun name string ID"/>
+            <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedGunNameStringIDGameHeader}"/>
+            <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableGunNameStringIDS}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding GunNameStringID}"/>
+            <Label Margin="-5,5,0,0" Content="Mount type"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:MountType}" SelectedItem="{Binding MountType}"/>
+            <Label Margin="-5,5,0,0" Content="Exclusion race"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource globalEnums:Race}" SelectedItem="{Binding ExclusionRace}"/>
+            <Label Margin="-5,5,0,0" Content="Can be fired while cloaked"/>
+            <CheckBox IsChecked="{Binding CanBeFiredWhileCloaked}" Content="{Binding CanBeFiredWhileCloaked}"/>
+            <Label Margin="-5,5,0,0" Content="Firing crew alert"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:GenericDialogSound}" SelectedItem="{Binding FiringCrewAlert}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:IslandCustomInfoFactoryViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,-5" Content="Occlusion Polygon Point # 00"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="-5,0,0,0" Content="X"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint00X, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Y"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint00Y, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Z"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint00Z, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+            </Grid>
+            <Label Margin="-5,5,0,-5" Content="Occlusion Polygon Point # 01"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="-5,0,0,0" Content="X"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint01X, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Y"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint01Y, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Z"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint01Z, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+            </Grid>
+            <Label Margin="-5,5,0,-5" Content="Occlusion Polygon Point # 02"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="-5,0,0,0" Content="X"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint02X, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Y"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint02Y, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Z"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint02Z, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+            </Grid>
+            <Label Margin="-5,5,0,-5" Content="Occlusion Polygon Point # 03"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="-5,0,0,0" Content="X"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint03X, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Y"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint03Y, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Z"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint03Z, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+            </Grid>
+            <Label Margin="-5,5,0,-5" Content="Occlusion Polygon Point # 04"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="-5,0,0,0" Content="X"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint04X, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Y"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint04Y, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Z"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint04Z, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+            </Grid>
+            <Label Margin="-5,5,0,-5" Content="Occlusion Polygon Point # 05"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="-5,0,0,0" Content="X"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint05X, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Y"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint05Y, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Z"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint05Z, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+            </Grid>
+            <Label Margin="-5,5,0,-5" Content="Occlusion Polygon Point # 06"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="-5,0,0,0" Content="X"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint06X, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Y"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint06Y, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Z"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint06Z, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+            </Grid>
+            <Label Margin="-5,5,0,-5" Content="Occlusion Polygon Point # 07"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="-5,0,0,0" Content="X"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint07X, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Y"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint07Y, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Z"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint07Z, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+            </Grid>
+            <Label Margin="-5,5,0,-5" Content="Occlusion Polygon Point # 08"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="-5,0,0,0" Content="X"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint08X, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Y"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint08Y, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Z"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint08Z, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+            </Grid>
+            <Label Margin="-5,5,0,-5" Content="Occlusion Polygon Point # 09"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="-5,0,0,0" Content="X"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint09X, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Y"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint09Y, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Margin="0,0,0,0" Content="Z"/>
+                    <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding OcclusionPolygonPoint09Z, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </Grid>
+            </Grid>
+            <Label Margin="-5,5,0,0" Content="Occlusion polygon point count"/>
+            <Slider Value="{Binding OcclusionPolygonPointCount}" Minimum="0" Maximum="9" TickFrequency="1" IsSnapToTickEnabled="True"/>
+            <Label Margin="-5,5,0,0" Content="Race"/>
+            <ComboBox ItemsSource="{localEnums:EnumBindingSource globalEnums:Race}" SelectedItem="{Binding Race}"/>
+            <Label Margin="-5,5,0,0" Content="Has ambient sound"/>
+            <CheckBox IsChecked="{Binding HasAmbientSound}" Content="{Binding HasAmbientSound}"/>
+            <StackPanel Visibility="{c:Binding HasAmbientSound}">
+                <Label Margin="-5,5,0,0" Content="Ambient sound max distance"/>
+                <TextBox Text="{Binding AmbientSoundMaxDistance, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Ambient sound name"/>
+                <ComboBox ItemsSource="{x:Static local:AppSettings.SoundDialogues}" SelectedItem="{Binding AmbientSoundName}"/>
+            </StackPanel>
+            <Label Margin="-5,5,0,0" Content="Core damage section max hit points"/>
+            <TextBox Text="{Binding CoreDamageSectionMaxHitPoints, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Announce sighting"/>
+            <CheckBox IsChecked="{Binding AnnounceSighting}" Content="{Binding AnnounceSighting}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MineCustomInfoFactoryViewModel}">
+        <ContentControl Template="{StaticResource BulletCustomInfoFactoryViewModelTemplate}"/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NebulaCustomInfoFactoryViewModel}">
+        <TabControl Margin="0,5,0,0">
+            <TabItem Header="Properties">
+                <StackPanel Margin="5">
+                    <Label Margin="-5,0,0,0" Content="Minimum lightning spawn distance from ships"/>
+                    <TextBox Text="{Binding MinimumLightningSpawnDistanceFromShips, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Minimum lightning bolt length"/>
+                    <TextBox Text="{Binding MinimumLightningBoltLength, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Maximum lightning spawn point Z amplitude"/>
+                    <TextBox Text="{Binding MaximumLightningSpawnPointZAmplitude, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Meteor hit chance modifier"/>
+                    <TextBox Text="{Binding MeteorHitChanceModifier, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <CheckBox Margin="0,15,0,0" Content="Nebula sound name" IsChecked="{Binding HasNebulaSoundName}"/>
+                    <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasNebulaSoundName}" ItemsSource="{x:Static local:AppSettings.SoundDialogues}" SelectedItem="{Binding NebulaSoundName}"/>
+                    <CheckBox Margin="0,15,0,0" Content="Meteor sound name" IsChecked="{Binding HasMeteorShowerSoundName}"/>
+                    <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasMeteorShowerSoundName}" ItemsSource="{x:Static local:AppSettings.SoundDialogues}" SelectedItem="{Binding MeteorShowerSoundName}"/>
+                    <CheckBox Margin="0,15,0,0" Content="Meteor sound name" IsChecked="{Binding HasSolarStormSoundName}"/>
+                    <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSolarStormSoundName}" ItemsSource="{x:Static local:AppSettings.SoundDialogues}" SelectedItem="{Binding SolarStormSoundName}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Lightning damage">
+                <ContentControl Content="{Binding LightningDamagePotentialViewModel}" Focusable="False"/>
+            </TabItem>
+            <TabItem Header="Meteor damage">
+                <ContentControl Content="{Binding MeteorDamagePotentialViewModel}" Focusable="False"/>
+            </TabItem>
+            <TabItem Header="Wind damage">
+                <ContentControl Content="{Binding WindDamagePotentialViewModel}" Focusable="False"/>
+            </TabItem>
+        </TabControl>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NovaMortarCustomInfoFactoryViewModel}">
+        <ContentControl Template="{StaticResource BulletCustomInfoFactoryViewModelTemplate}"/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ShipCustomInfoFactoryViewModel}">
+        <TabControl Margin="0,5,0,0">
+            <TabItem Header="Properties">
+                <StackPanel Margin="5">
+                    <Label Margin="-5,0,0,0" Content="Ship bar icon texture"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.HudEntries}" SelectedItem="{Binding ShipBarIconTexture}"/>
+                    <Label Margin="-5,5,0,0" Content="Selected indicator percentage of radius"/>
+                    <TextBox Text="{Binding SelectedIndicatorPercentageOfRadius, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Distance to start sphere picking"/>
+                    <TextBox Text="{Binding DistanceToStartSpherePicking, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Displayable ship name string ID"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedDisplayableShipnameStringIDGameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableDisplayableShipnameStringIDS}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding DisplayableShipnameStringID}"/>
+                    <Label Margin="-5,5,0,0" Content="Ship race"/>
+                    <ComboBox ItemsSource="{localEnums:EnumBindingSource globalEnums:Race}" SelectedItem="{Binding ShipRace}"/>
+                    <Label Margin="-5,5,0,0" Content="Is tender"/>
+                    <CheckBox IsChecked="{Binding IsTender}" Content="{Binding IsTender}"/>
+                    <Label Margin="-5,5,0,0" Content="Number of lifeboats"/>
+                    <TextBox Text="{Binding NumberOfLifeboats, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Is lifeboat"/>
+                    <CheckBox IsChecked="{Binding IsLifeboat}" Content="{Binding IsLifeboat}"/>
+                    <Label Margin="-5,5,0,0" Content="Is cloakable"/>
+                    <CheckBox IsChecked="{Binding IsCloakable}" Content="{Binding IsCloakable}"/>
+                    <Label Margin="-5,5,0,0" Content="Ship size"/>
+                    <TextBox Text="{Binding ShipSize, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Core damage section max hit points"/>
+                    <TextBox Text="{Binding CoreDamageSectionMaxHitPoints, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Explosion effect name"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding ExplosionEffectName}"/>
+                    <Label Margin="-5,5,0,0" Content="Engine type"/>
+                    <ComboBox ItemsSource="{localEnums:EnumBindingSource enums:EngineType}" SelectedItem="{Binding EngineType}"/>
+                    <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasEngineSoundNameEmergency}" Content="Engine sound name emergency"/>
+                    <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasEngineSoundNameEmergency}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding EngineSoundNameEmergency}"/>
+                    <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasEngineSoundNameFull}" Content="Engine sound name full"/>
+                    <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasEngineSoundNameFull}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding EngineSoundNameFull}"/>
+                    <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasEngineSoundNameHalf}" Content="Engine sound name half"/>
+                    <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasEngineSoundNameHalf}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding EngineSoundNameHalf}"/>
+                    <Label Margin="-5,5,0,0" Content="Victory point cost"/>
+                    <TextBox Text="{Binding VictoryPointCost, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Is available in multiplayer"/>
+                    <CheckBox IsChecked="{Binding IsAvailableInMultiplayer}" Content="{Binding IsAvailableInMultiplayer}"/>
+                    <Label Margin="-5,5,0,0" Content="Repair effect name"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding RepairEffectName}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Ship names">
+                <StackPanel Margin="5">
+                    <Label Margin="-5,0,0,0" Content="Available unique ship name ID 00"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID00GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS00}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID00}"/>
+                    <Label Margin="-5,5,0,0" Content="Available unique ship name ID 01"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID01GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS01}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID01}"/>
+                    <Label Margin="-5,5,0,0" Content="Available unique ship name ID 02"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID02GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS02}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID02}"/>
+                    <Label Margin="-5,5,0,0" Content="Available unique ship name ID 03"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID03GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS03}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID03}"/>
+                    <Label Margin="-5,5,0,0" Content="Available unique ship name ID 04"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID04GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS04}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID04}"/>
+                    <Label Margin="-5,5,0,0" Content="Available unique ship name ID 05"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID05GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS05}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID05}"/>
+                    <Label Margin="-5,5,0,0" Content="Available unique ship name ID 06"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID06GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS06}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID06}"/>
+                    <Label Margin="-5,5,0,0" Content="Available unique ship name ID 07"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID07GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS07}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID07}"/>
+                    <Label Margin="-5,5,0,0" Content="Available unique ship name ID 08"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID08GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS08}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID08}"/>
+                    <Label Margin="-5,5,0,0" Content="Available unique ship name ID 09"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID09GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS09}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID09}"/>
+                    <Label Margin="-5,5,0,0" Content="Available unique ship name ID 10"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID10GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS10}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID10}"/>
+                    <Label Margin="-5,5,0,0" Content="Available unique ship name ID 11"/>
+                    <ComboBox ItemsSource="{x:Static local:AppSettings.TPGameHeaderStrings}" SelectedItem="{Binding SelectedAvailableUniqueShipNameID11GameHeader}"/>
+                    <ComboBox Margin="0,5,0,0" ItemsSource="{Binding AvailableAvailableUniqueShipNameIDS11}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding AvailableUniqueShipNameID11}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Crew members">
+                <StackPanel Margin="5">
+                    <Label Margin="-5,0,0,0" Content="Max number of gunners"/>
+                    <TextBox Text="{Binding MaxNumberOfGunners, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Max number of captains"/>
+                    <TextBox Text="{Binding MaxNumberOfCaptains, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Max number of first mates"/>
+                    <TextBox Text="{Binding MaxNumberOfFirstMates, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Max number of navigators"/>
+                    <TextBox Text="{Binding MaxNumberOfNavigators, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Max number of riggers"/>
+                    <TextBox Text="{Binding MaxNumberOfRiggers, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Max number of lookouts"/>
+                    <TextBox Text="{Binding MaxNumberOfLookouts, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ShipDebrisCustomInfoFactoryViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Life time min"/>
+            <TextBox Text="{Binding LifeTimeMin, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Life time max"/>
+            <TextBox Text="{Binding LifeTimeMax, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SpaceAnimalCustomInfoFactoryViewModel}">
+        <StackPanel>
+            <StackPanel>
+                <Label Margin="-5,0,0,0" Content="Selected indicator percentage of radius"/>
+                <TextBox Text="{Binding SelectedIndicatorPercentageOfRadius, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,0,0,0" Content="Distanceto start sphere picking"/>
+                <TextBox Text="{Binding DistancetoStartSpherePicking, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,0,0,0" Content="Shortest time between sounds"/>
+                <TextBox Text="{Binding ShortestTimeBetweenSounds, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,0,0,0" Content="Longest time between sounds"/>
+                <TextBox Text="{Binding LongestTimeBetweenSounds, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_0}" Content="Sound_0"/>
+                <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_0}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_0}"/>
+                <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_1}" Content="Sound_1"/>
+                <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_1}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_1}"/>
+                <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_2}" Content="Sound_2"/>
+                <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_2}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_2}"/>
+                <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_3}" Content="Sound_3"/>
+                <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_3}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_3}"/>
+                <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_4}" Content="Sound_4"/>
+                <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_4}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_4}"/>
+                <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_5}" Content="Sound_5"/>
+                <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_5}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_5}"/>
+                <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_6}" Content="Sound_6"/>
+                <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_6}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_6}"/>
+                <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_7}" Content="Sound_7"/>
+                <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_7}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_7}"/>
+                <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_8}" Content="Sound_8"/>
+                <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_8}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_8}"/>
+                <CheckBox Margin="0,15,0,0" IsChecked="{Binding HasSound_9}" Content="Sound_9"/>
+                <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasSound_9}" ItemsSource="{x:Static local:AppSettings.SoundEffects}" SelectedItem="{Binding Sound_9}"/>
+                <Label Margin="-5,5,0,0" Content="Report whale"/>
+                <CheckBox IsChecked="{Binding ReportSpotting}" Content="{Binding ReportSpotting}"/>
+                <Label Margin="-5,5,0,0" Content="Sound distance"/>
+                <TextBox Text="{Binding SoundDistance, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:StarMortarCustomInfoFactoryViewModel}">
+        <ContentControl Template="{StaticResource BulletCustomInfoFactoryViewModelTemplate}">
+            <StackPanel Margin="0,0,0,5">
+                <Label Margin="-5,0,0,0" Content="Magnitude"/>
+                <TextBox Text="{Binding Magnitude, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Duration"/>
+                <TextBox Text="{Binding Duration, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                <Label Margin="-5,5,0,0" Content="Max radius"/>
+                <TextBox Text="{Binding MaxRadius, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            </StackPanel>
+        </ContentControl>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:TorpedoCustomInfoFactoryViewModel}">
+        <ContentControl Template="{StaticResource BulletCustomInfoFactoryViewModelTemplate}"/>
+    </DataTemplate>
+</ResourceDictionary>

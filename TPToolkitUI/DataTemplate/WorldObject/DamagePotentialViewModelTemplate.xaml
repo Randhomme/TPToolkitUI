@@ -1,0 +1,92 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.WorldObject"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate DataType="{x:Type vm:DamagePotentialViewModel}">
+        <TabControl Margin="5">
+            <TabItem Header="Hull wood">
+                <StackPanel Margin="5">
+                    <Label Margin="-5,0,0,0" Content="Chance of critical damage"/>
+                    <TextBox Text="{Binding ChanceOfCriticalDamageWood, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Chance of fire"/>
+                    <TextBox Text="{Binding ChanceOfFireWood, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Initial fire strength"/>
+                    <TextBox Text="{Binding InitialFireStrengthWood, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage lower bound"/>
+                    <TextBox Text="{Binding DamageLowerBoundWood, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage upper bound"/>
+                    <TextBox Text="{Binding DamageUpperBoundWood, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Hull reinforced wood">
+                <StackPanel Margin="5">
+                    <Label Margin="-5,0,0,0" Content="Chance of critical damage"/>
+                    <TextBox Text="{Binding ChanceOfCriticalDamageReinforced, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Chance of fire"/>
+                    <TextBox Text="{Binding ChanceOfFireReinforced, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Initial fire strength"/>
+                    <TextBox Text="{Binding InitialFireStrengthReinforced, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage lower bound"/>
+                    <TextBox Text="{Binding DamageLowerBoundReinforced, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage upper bound"/>
+                    <TextBox Text="{Binding DamageUpperBoundReinforced, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Hull iron">
+                <StackPanel Margin="5">
+                    <Label Margin="-5,0,0,0" Content="Chance of critical damage"/>
+                    <TextBox Text="{Binding ChanceOfCriticalDamageIron, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Chance of fire"/>
+                    <TextBox Text="{Binding ChanceOfFireIron, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Initial fire strength"/>
+                    <TextBox Text="{Binding InitialFireStrengthIron, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage lower bound"/>
+                    <TextBox Text="{Binding DamageLowerBoundIron, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage upper bound"/>
+                    <TextBox Text="{Binding DamageUpperBoundIron, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Sail cloth">
+                <StackPanel Margin="5">
+                    <Label Margin="-5,0,0,0" Content="Chance of critical damage"/>
+                    <TextBox Text="{Binding ChanceOfCriticalDamageCloth, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Chance of fire"/>
+                    <TextBox Text="{Binding ChanceOfFireCloth, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Initial fire strength"/>
+                    <TextBox Text="{Binding InitialFireStrengthCloth, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage lower bound"/>
+                    <TextBox Text="{Binding DamageLowerBoundCloth, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage upper bound"/>
+                    <TextBox Text="{Binding DamageUpperBoundCloth, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Wall stone">
+                <StackPanel Margin="5">
+                    <Label Margin="-5,0,0,0" Content="Chance of critical damage"/>
+                    <TextBox Text="{Binding ChanceOfCriticalDamageStone, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Chance of fire"/>
+                    <TextBox Text="{Binding ChanceOfFireStone, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Initial fire strength"/>
+                    <TextBox Text="{Binding InitialFireStrengthStone, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage lower bound"/>
+                    <TextBox Text="{Binding DamageLowerBoundStone, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage upper bound"/>
+                    <TextBox Text="{Binding DamageUpperBoundStone, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Dragon scale">
+                <StackPanel Margin="5">
+                    <Label Margin="-5,0,0,0" Content="Chance of critical damage"/>
+                    <TextBox Text="{Binding ChanceOfCriticalDamageDragon, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Chance of fire"/>
+                    <TextBox Text="{Binding ChanceOfFireDragon, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Initial fire strength"/>
+                    <TextBox Text="{Binding InitialFireStrengthDragon, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage lower bound"/>
+                    <TextBox Text="{Binding DamageLowerBoundDragon, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Damage upper bound"/>
+                    <TextBox Text="{Binding DamageUpperBoundDragon, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </DataTemplate>
+</ResourceDictionary>
