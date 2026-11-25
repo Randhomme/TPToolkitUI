@@ -20,6 +20,7 @@
                 <ResourceDictionary Source="/DataTemplate/WorldObject/AiEntityFactoriesViewModelTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplate/WorldObject/CollisionFactoriesViewModelTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplate/WorldObject/CustomInfoFactoriesViewModelTemplate.xaml"/>
+                <ResourceDictionary Source="/DataTemplate/WorldObject/PhysicsFactoriesViewModelTemplate.xaml"/>
                 <!--<ResourceDictionary Source="/Styles/MenuStyle.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
