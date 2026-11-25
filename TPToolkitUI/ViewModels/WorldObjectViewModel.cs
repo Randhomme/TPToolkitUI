@@ -6,12 +6,14 @@ using TPToolkitLib.WorldObject;
 using TPToolkitLib.WorldObject.Definitions.AiEntityFactories;
 using TPToolkitLib.WorldObject.Definitions.CollisionFactories;
 using TPToolkitLib.WorldObject.Definitions.CustomInfoFactories;
+using TPToolkitLib.WorldObject.Definitions.PhysicsFactories;
 using TPToolkitUI.Enums;
 using TPToolkitUI.Services;
 using TPToolkitUI.ViewModels.WorldObject;
 using TPToolkitUI.ViewModels.WorldObject.AiEntityFactories;
 using TPToolkitUI.ViewModels.WorldObject.CollisionFactories;
 using TPToolkitUI.ViewModels.WorldObject.CustomInfoFactories;
+using TPToolkitUI.ViewModels.WorldObject.PhysicsFactories;
 
 namespace TPToolkitUI.ViewModels
 {
@@ -28,6 +30,8 @@ namespace TPToolkitUI.ViewModels
         public partial CollisionFactory CollisionFactory { get; set; }
         [ObservableProperty]
         public partial CustomInfoFactory CustomInfoFactory { get; set; }
+        [ObservableProperty]
+        public partial PhysicsFactory PhysicsFactory { get; set; }
         [ObservableProperty]
         public partial AiEntityDefinitionViewModel? AiEntityDefinitionViewModel { get; private set; }
         [ObservableProperty]
@@ -103,6 +107,24 @@ namespace TPToolkitUI.ViewModels
                     CustomInfoFactory.SpaceAnimalCustomInfoFactory => new SpaceAnimalCustomInfoFactoryViewModel(new(worldObjectTypeString)),
                     CustomInfoFactory.StarMortarCustomInfoFactory => new StarMortarCustomInfoFactoryViewModel(new(worldObjectTypeString)),
                     CustomInfoFactory.TorpedoCustomInfoFactory => new TorpedoCustomInfoFactoryViewModel(new(worldObjectTypeString)),
+                    _ => null,
+                };
+            }
+        }
+
+        partial void OnPhysicsFactoryChanged(PhysicsFactory value)
+        {
+            if (shouldUpdateViewModelsFromUI)
+            {
+                PhysicsDefinitionViewModel = value switch
+                {
+                    PhysicsFactory.DragonPhysics => new DragonPhysicsViewModel(new(worldObjectTypeString)),
+                    PhysicsFactory.MinePhysics => new MinePhysicsViewModel(new(worldObjectTypeString)),
+                    PhysicsFactory.ProjectilePhysics => new ProjectilePhysicsViewModel(new(worldObjectTypeString)),
+                    PhysicsFactory.ShipDemo => new ShipDemoViewModel(new(worldObjectTypeString)),
+                    PhysicsFactory.SpaceObjectPhysics => new SpaceObjectPhysicsViewModel(new(worldObjectTypeString)),
+                    PhysicsFactory.TorpedoPhysics => new TorpedoPhysicsViewModel(new(worldObjectTypeString)),
+                    PhysicsFactory.WhalePhysics => new WhalePhysicsViewModel(new(worldObjectTypeString)),
                     _ => null,
                 };
             }
@@ -645,6 +667,41 @@ namespace TPToolkitUI.ViewModels
                 default:
                     CustomInfoDefinitionViewModel = null;
                     CustomInfoFactory = CustomInfoFactory.None;
+                    break;
+            }
+            switch (worldObjectType.PhysicsDefinition)
+            {
+                case DragonPhysics dragonPhysics:
+                    PhysicsDefinitionViewModel = new DragonPhysicsViewModel(dragonPhysics);
+                    PhysicsFactory = PhysicsFactory.DragonPhysics;
+                    break;
+                case MinePhysics minePhysics:
+                    PhysicsDefinitionViewModel = new MinePhysicsViewModel(minePhysics);
+                    PhysicsFactory = PhysicsFactory.MinePhysics;
+                    break;
+                case ProjectilePhysics projectilePhysics:
+                    PhysicsDefinitionViewModel = new ProjectilePhysicsViewModel(projectilePhysics);
+                    PhysicsFactory = PhysicsFactory.ProjectilePhysics;
+                    break;
+                case ShipDemo shipDemo:
+                    PhysicsDefinitionViewModel = new ShipDemoViewModel(shipDemo);
+                    PhysicsFactory = PhysicsFactory.ShipDemo;
+                    break;
+                case SpaceObjectPhysics spaceObjectPhysics:
+                    PhysicsDefinitionViewModel = new SpaceObjectPhysicsViewModel(spaceObjectPhysics);
+                    PhysicsFactory = PhysicsFactory.SpaceObjectPhysics;
+                    break;
+                case TorpedoPhysics torpedoPhysics:
+                    PhysicsDefinitionViewModel = new TorpedoPhysicsViewModel(torpedoPhysics);
+                    PhysicsFactory = PhysicsFactory.TorpedoPhysics;
+                    break;
+                case WhalePhysics whalePhysics:
+                    PhysicsDefinitionViewModel = new WhalePhysicsViewModel(whalePhysics);
+                    PhysicsFactory = PhysicsFactory.WhalePhysics;
+                    break;
+                default:
+                    PhysicsDefinitionViewModel = null;
+                    PhysicsFactory = PhysicsFactory.None;
                     break;
             }
             shouldUpdateViewModelsFromUI = true;
