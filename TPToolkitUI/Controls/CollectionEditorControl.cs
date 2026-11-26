@@ -141,7 +141,7 @@ namespace TPToolkitUI.Controls
         }
 
         public static readonly DependencyProperty AddCommandProperty =
-            DependencyProperty.Register(nameof(AddCommand), typeof(ICommand), typeof(CollectionEditorControl));
+            DependencyProperty.Register(nameof(AddCommand), typeof(ICommand), typeof(CollectionEditorControl), new PropertyMetadata(null, OnAddCommandChanged));
 
         public ICommand? CopyCommand
         {
@@ -167,6 +167,12 @@ namespace TPToolkitUI.Controls
             control.DetachFromOldItemsSource();
             control.AttachToNewItemsSource(e.NewValue);
             control.GetItemsType();
+            control.UpdateAddButton();
+        }
+
+        private static void OnAddCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((CollectionEditorControl)d).UpdateAddButton();
         }
 
         private static void OnSelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -177,12 +183,6 @@ namespace TPToolkitUI.Controls
                 control.SelectedItem = wrapper.Item;
             }
         }
-
-        //private static void OnFactoryChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        //{
-        //    var control = (CollectionEditorControl)d;
-        //    control.addCommand.NotifyCanExecuteChanged();
-        //}
 
         private static void OnSelectedItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -365,6 +365,15 @@ namespace TPToolkitUI.Controls
             }
         }
 
+        private void UpdateAddButton()
+        {
+            if (addButton == null)
+                return;
+
+            addButton.Command = AddCommand;
+            addButton.Visibility = AddCommand != null ? Visibility.Visible : Visibility.Collapsed;
+        }
+
         public override void OnApplyTemplate()
         {
             if (dataGrid != null)
@@ -404,15 +413,7 @@ namespace TPToolkitUI.Controls
                 dataGrid.CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, OnCopyExecuted, OnCopyCanExecute));
                 dataGrid.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteExecuted, OnPasteCanExecute));
             }
-            //addButton?.Command = addCommand;
-            if (addButton != null)
-                if (AddCommand != null)
-                {
-                    addButton.Command = AddCommand;
-                    addButton.Visibility = Visibility.Visible;
-                }
-                else
-                    addButton.Visibility = Visibility.Collapsed;
+            UpdateAddButton();
             deleteSelectedButton?.Command = deleteSelectedCommand;
             moveUpButton?.Command = moveUpCommand;
             moveDownButton?.Command = moveDownCommand;
@@ -534,39 +535,6 @@ namespace TPToolkitUI.Controls
         {
             itemsType = ItemsSource?.GetType().GetInterfaces().FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IList<>))?.GetGenericArguments()[0];
         }
-
-        //private object? CreateItem()
-        //{
-        //    if (Factory != null)
-        //        return Factory.Invoke();
-
-        //    if (itemsType == null)
-        //        return null;
-
-        //    var ctor = itemsType.GetConstructor(Type.EmptyTypes);
-        //    return ctor == null
-        //        ? throw new InvalidOperationException(
-        //            $"No factory provided and type {itemsType.Name} has no parameterless constructor.")
-        //        : ctor.Invoke(null);
-        //}
-
-        //private void AddNewItem()
-        //{
-        //    EditableList?.Add(CreateItem());
-        //}
-
-        //private bool CanAddNewItem()
-        //{
-        //    var result =  Factory != null || itemsType?.GetConstructor(Type.EmptyTypes) != null;
-        //    if (addButton != null)
-        //        if (result)
-        //            addButton.Visibility = Visibility.Visible;
-        //            //addButton.IsEnabled = true;
-        //        else
-        //            addButton.Visibility = Visibility.Collapsed;
-        //            //addButton.IsEnabled = false;
-        //    return result;
-        //}
 
         private void DeleteItem(object? item)
         {
