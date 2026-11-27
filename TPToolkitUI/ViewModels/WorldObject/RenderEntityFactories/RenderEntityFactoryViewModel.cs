@@ -29,7 +29,7 @@ namespace TPToolkitUI.ViewModels.WorldObject.RenderEntityFactories
                 SetAndValidateProperty(Model.MeshScene, value, Model, (m, ms) => m.MeshScene = ms);
                 for (int i = 0; i < MeshAttributes.Count; i++)
                 {
-                    MeshAttributes[i].RefreshAvailableMsbElements(value);
+                    MeshAttributes[i].RefreshMeshScene(value);
                 }
             }
         }

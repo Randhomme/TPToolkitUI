@@ -107,4 +107,52 @@
             </TabItem>
         </TabControl>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm2:DockPointViewModel}">
+        <StackPanel>
+            <CheckBox Content="Animation" IsChecked="{Binding HasAnimation}"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasAnimation}" ItemsSource="{Binding AvailableAnimations}" SelectedItem="{Binding Animation}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm2:EnginePortPlacementViewModel}">
+        <StackPanel>
+            <Label Content="Effect name"/>
+            <ComboBox Margin="0,5,0,0" ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding EffectName}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm2:FlagAttachmentPointViewModel}"/>
+    <DataTemplate DataType="{x:Type vm2:FullyCloakedEffectPointViewModel}"/>
+    <DataTemplate DataType="{x:Type vm2:GunMuzzlePlacementViewModel}"/>
+    <DataTemplate DataType="{x:Type vm2:GunPlacementViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Gun"/>
+            <ComboBox ItemsSource="{x:Static local:AppSettings.Guns}" SelectedItem="{Binding Gun}"/>
+            <Label Margin="-5,5,0,0" Content="Max rotation"/>
+            <TextBox Text="{Binding MaxRotation, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Bank"/>
+            <ComboBox ItemsSource="{globalEnums:EnumBindingSource enums:Bank}" SelectedItem="{Binding Bank}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm2:GunVerticalPivotPlacementViewModel}"/>
+    <DataTemplate DataType="{x:Type vm2:MeshHitPointsViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Association name"/>
+            <TextBox Text="{Binding AssociationName, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm2:PlayEffectViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Effect name"/>
+            <ComboBox ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding EffectName}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm2:TorpedoHomingPointViewModel}"/>
+    <DataTemplate DataType="{x:Type vm2:ToweePointViewModel}"/>
+    <DataTemplate DataType="{x:Type vm2:TowerPointViewModel}"/>
+    <DataTemplate DataType="{x:Type vm2:VolcanoSmokeViewModel}"/>
+    <DataTemplate DataType="{x:Type vm2:WakePlacementViewModel}">
+        <StackPanel>
+            <Label Margin="-5,0,0,0" Content="Effect name"/>
+            <ComboBox ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding EffectName}"/>
+        </StackPanel>
+    </DataTemplate>
 </ResourceDictionary>

@@ -77,24 +77,33 @@ namespace TPToolkitUI.ViewModels.WorldObject.RenderEntityFactories
             }
         }
 
-        public void RefreshAvailableMsbElements(MsbScene newMeshScene)
+        public void RefreshMeshScene(MsbScene newMeshScene)
+        {
+            RefreshAvailableMsbElements(newMeshScene);
+            RefreshMeshSubAttributes(newMeshScene);
+        }
+
+        private void RefreshAvailableMsbElements(MsbScene newMeshScene)
         {
             this.meshScene = newMeshScene;
             var mesh = Model.Mesh;
             OnPropertyChanged(nameof(AvailableMsbElements));
             var newMesh = AvailableMsbElements.FirstOrDefault((m) => m.Name.Equals(mesh?.Name));
             Mesh = newMesh ?? AvailableMsbElements.FirstOrDefault(); // Try to get an element with the same name
-            RefreshAvailableAdjacents(newMeshScene, true);
         }
         
-        // Refresh adjacent list for damage section attributes
-        private void RefreshAvailableAdjacents(MsbScene newMeshScene, bool clearExistingAdjacents)
+        
+        private void RefreshMeshSubAttributes(MsbScene newMeshScene)
         {
             for (int i = 0; i < MeshSubAttributes.Count; i++)
             {
                 var meshSubAttribute = MeshSubAttributes[i];
+                // Refresh adjacent list for damage section attributes
                 if (meshSubAttribute.ModelPropertiesViewModel is DamageSectionViewModel damageSectionViewModel)
-                    damageSectionViewModel.RefreshAvailableAdjacentElements(newMeshScene, clearExistingAdjacents);
+                    damageSectionViewModel.RefreshAvailableAdjacentElements(newMeshScene, true);
+                // Refresh animation list for dock point attributes
+                else if (meshSubAttribute.ModelPropertiesViewModel is DockPointViewModel dockPointViewModel)
+                    dockPointViewModel.RefreshAvailableAnimations(newMeshScene.MsbAnimations);
             }
         }
 
