@@ -1,0 +1,110 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.WorldObject.RenderEntityFactories"
+                    xmlns:vm2="clr-namespace:TPToolkitUI.ViewModels.WorldObject.RenderEntityFactories.MeshSubAttributes"
+                    xmlns:damageSectionVm="clr-namespace:TPToolkitUI.ViewModels.WorldObject.RenderEntityFactories.MeshSubAttributes.DamageSection"
+                    xmlns:controls="clr-namespace:TPToolkitUI.Controls"
+                    xmlns:globalEnums="clr-namespace:TPToolkitUI.Enums"
+                    xmlns:enums="clr-namespace:TPToolkitLib.WorldObject.Enums;assembly=TPToolkitLib"
+                    xmlns:local="clr-namespace:TPToolkitUI"
+                    xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate DataType="{x:Type vm:MeshAttributeViewModel}">
+        <DockPanel Margin="5">
+            <Label DockPanel.Dock="Top" Margin="-5,0,0,0" Content="Mesh name"/>
+            <ComboBox DockPanel.Dock="Top" ItemsSource="{Binding AvailableMsbElements}" SelectedItem="{Binding Mesh}"/>
+            <controls:CollectionEditorControl Margin="-2.5,5,0,0" DockPanel.Dock="Top" ItemsSource="{Binding MeshSubAttributes}" AddCommand="{Binding AddMeshSubAttributeCommand}"/>
+        </DockPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:MeshSubAttributeViewModel}">
+        <ScrollViewer>
+            <DockPanel Margin="5">
+                <Label DockPanel.Dock="Top" Margin="-5,0,0,0" Content="Attribute name"/>
+                <ComboBox DockPanel.Dock="Top" ItemsSource="{globalEnums:EnumBindingSource globalEnums:MeshSubAttribute}" SelectedItem="{Binding MeshSubAttributeType}"/>
+                <ContentControl DockPanel.Dock="Top" Margin="0,5,0,0" Content="{Binding ModelPropertiesViewModel}"/>
+            </DockPanel>
+        </ScrollViewer>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm2:BoardingEffectPointViewModel}"/>
+    <DataTemplate DataType="{x:Type vm2:CloakingEffectPointViewModel}"/>
+    <DataTemplate DataType="{x:Type damageSectionVm:DestructFxViewModel}">
+        <StackPanel Margin="5">
+            <CheckBox Content="Effect" IsChecked="{Binding HasEffect}"/>
+            <ComboBox Margin="0,5,0,0" Visibility="{c:Binding HasEffect}" ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding Effect}"/>
+            <Label Margin="-5,5,0,0" Content="Time"/>
+            <TextBox Text="{Binding Time, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="X"/>
+            <TextBox Text="{Binding X, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Y"/>
+            <TextBox Text="{Binding Y, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+            <Label Margin="-5,5,0,0" Content="Z"/>
+            <TextBox Text="{Binding Z, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm2:DamageSectionViewModel}">
+        <TabControl Margin="0,5,0,0">
+            <TabItem Header="Properties">
+                <StackPanel Margin="5">
+                    <Label Margin="-5,0,0,0" Content="Vital to ship"/>
+                    <CheckBox IsChecked="{Binding VitalToShip}" Content="{Binding VitalToShip}"/>
+                    <Label Margin="-5,5,0,0" Content="Vital to max velocity"/>
+                    <CheckBox IsChecked="{Binding VitalToMaxVelocity}" Content="{Binding VitalToMaxVelocity}"/>
+                    <Label Margin="-5,5,0,0" Content="Vital to maneuvrability"/>
+                    <CheckBox IsChecked="{Binding VitalToManeuverability}" Content="{Binding VitalToManeuverability}"/>
+                    <Label Margin="-5,5,0,0" Content="Vital to mission"/>
+                    <CheckBox IsChecked="{Binding VitalToMission}" Content="{Binding VitalToMission}"/>
+                    <Label Margin="-5,5,0,0" Content="Swappable"/>
+                    <CheckBox IsChecked="{Binding Swappable}" Content="{Binding Swappable}"/>
+                    <Label Margin="-5,5,0,0" Content="Material"/>
+                    <ComboBox ItemsSource="{globalEnums:EnumBindingSource enums:Material}" SelectedItem="{Binding Material}"/>
+                    <Label Margin="-5,5,0,0" Content="Hitpoints"/>
+                    <TextBox Text="{Binding Hitpoints, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    <Label Margin="-5,5,0,0" Content="Vital section core damage percent"/>
+                    <TextBox Text="{Binding VitalSectionCoreDamagePercent, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Criticals">
+                <ListBox Margin="-6,-3" ItemsSource="{Binding Criticals}">
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Style>
+                    </ListBox.Style>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Margin="5" Content="{Binding}" IsChecked="{Binding IsSelected}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="Adjacents">
+                <ListBox Margin="-6,-3" ItemsSource="{Binding AdjacentElements}">
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Style>
+                    </ListBox.Style>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Margin="5" Content="{Binding}" IsChecked="{Binding IsSelected}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="Debris">
+                <StackPanel Margin="5">
+                    <CheckBox Content="Debris mesh scene" IsChecked="{Binding HasDebrisMeshScene}"/>
+                    <StackPanel Visibility="{c:Binding HasDebrisMeshScene}">
+                        <ComboBox Margin="0,5,0,0" ItemsSource="{x:Static local:AppSettings.MeshScenes}" SelectedItem="{Binding DebrisMsbScene}"/>
+                        <Label Margin="-5,5,0,0" Content="Debris fx"/>
+                        <ComboBox ItemsSource="{x:Static local:AppSettings.Effects}" SelectedItem="{Binding DebrisFx}"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Destruct fx">
+                <controls:CollectionEditorControl ItemsSource="{Binding DestructFxs}" AddCommand="{Binding AddDestructFxCommand}"/>
+            </TabItem>
+        </TabControl>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:vm="clr-namespace:TPToolkitUI.ViewModels.WorldObject.RenderEntityFactories"
+                    xmlns:local="clr-namespace:TPToolkitUI"
+                    xmlns:controls="clr-namespace:TPToolkitUI.Controls"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate DataType="{x:Type vm:RenderEntityFactoryViewModel}">
+        <TabControl Margin="0,5,0,0">
+            <TabItem Header="Properties">
+                <ScrollViewer>
+                    <StackPanel Margin="5">
+                        <Label Margin="-5,0,0,0" Content="Distant"/>
+                        <CheckBox IsChecked="{Binding Distant}" Content="{Binding Distant}"/>
+                        <Label Margin="-5,5,0,0" Content="Visible"/>
+                        <CheckBox IsChecked="{Binding Visible}" Content="{Binding Visible}"/>
+                        <Label Margin="-5,5,0,0" Content="Mesh scene name"/>
+                        <ComboBox ItemsSource="{x:Static local:AppSettings.MeshScenes}" SelectedItem="{Binding MeshScene}"/>
+                        <Label Margin="-5,5,0,0" Content="Rotation speed"/>
+                        <TextBox Text="{Binding RotationSpeed, NotifyOnValidationError=True, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Mesh attributes">
+                <controls:CollectionEditorControl ItemsSource="{Binding MeshAttributes}" AddCommand="{Binding AddMeshAttributeCommand}"/>
+            </TabItem>
+        </TabControl>
+    </DataTemplate>
+</ResourceDictionary>

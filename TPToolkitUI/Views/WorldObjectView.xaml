@@ -27,7 +27,11 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Render entity">
-                
+                <DockPanel Margin="5">
+                    <Label DockPanel.Dock="Top" Margin="-5,0,0,0" Content="Factory type"/>
+                    <ComboBox DockPanel.Dock="Top" ItemsSource="{localEnums:EnumBindingSource localEnums:RenderEntityFactory}" SelectedItem="{Binding RenderEntityFactory}"/>
+                    <ContentControl DockPanel.Dock="Top" Margin="0,5,0,0" Content="{Binding RenderEntityDefinitionViewModel}"/>
+                </DockPanel>
             </TabItem>
             <TabItem Header="Physics">
                 <ScrollViewer>

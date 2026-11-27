@@ -17,6 +17,7 @@ namespace TPToolkitUI
         public static ObservableCollection<string> Effects { get; } = [];
         public static ObservableCollection<string> HudEntries { get; } = [];
         public static ObservableCollection<string> Meshes { get; } = [];
+        public static ObservableCollection<MsbScene> MeshScenes { get; } = [];
         public static ObservableCollection<string> SoundDialogues { get; } = [];
         public static ObservableCollection<string> SoundEffects { get; } = [];
         public static ObservableCollection<TPGameHeaderStrings> TPGameHeaderStrings { get; } = [];
@@ -80,6 +81,7 @@ namespace TPToolkitUI
             Effects.Clear();
             HudEntries.Clear();
             Meshes.Clear();
+            MeshScenes.Clear();
             SoundDialogues.Clear();
             SoundEffects.Clear();
             TPGameHeaderStrings.Clear();
@@ -101,6 +103,11 @@ namespace TPToolkitUI
             foreach (var item in TPGameTool.Meshes)
             {
                 Meshes.Add(item);
+            }
+            MeshScenes.Add(MsbScene.None);
+            foreach (var item in TPGameTool.MeshScenes)
+            {
+                MeshScenes.Add(item);
             }
             foreach (var item in TPGameTool.SoundDialogues)
             {

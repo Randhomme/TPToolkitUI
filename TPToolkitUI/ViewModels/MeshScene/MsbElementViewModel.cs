@@ -174,9 +174,9 @@ namespace TPToolkitUI.ViewModels.MeshScene
 
         private void PopulateMsbAttributes(MsbElement model)
         {
-            for(int i = 0; i < model.MsbAttirbutes.Count; i++)
+            for(int i = 0; i < model.MsbAttributes.Count; i++)
             {
-                MsbAttributes.Add(new(model.MsbAttirbutes[i]));
+                MsbAttributes.Add(new(model.MsbAttributes[i]));
             }
         }
 
@@ -188,32 +188,32 @@ namespace TPToolkitUI.ViewModels.MeshScene
                     for (int i = 0; i < e.NewItems.Count; i++)
                     {
                         var newItem = (MsbAttributeViewModel)e.NewItems[i];
-                        Model.MsbAttirbutes.Insert(e.NewStartingIndex + i, newItem.Model);
+                        Model.MsbAttributes.Insert(e.NewStartingIndex + i, newItem.Model);
                     }
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
                     for (int i = 0; i < e.OldItems.Count; i++)
-                        Model.MsbAttirbutes.RemoveAt(e.OldStartingIndex);
+                        Model.MsbAttributes.RemoveAt(e.OldStartingIndex);
                     break;
 
                 case NotifyCollectionChangedAction.Replace:
                     for (int i = 0; i < e.NewItems.Count; i++)
                     {
                         var item = (MsbAttributeViewModel)e.NewItems[i];
-                        Model.MsbAttirbutes[e.NewStartingIndex + i] = item.Model;
+                        Model.MsbAttributes[e.NewStartingIndex + i] = item.Model;
                     }
                     break;
 
                 case NotifyCollectionChangedAction.Move:
-                    var item1 = Model.MsbAttirbutes[e.OldStartingIndex];
+                    var item1 = Model.MsbAttributes[e.OldStartingIndex];
 
-                    Model.MsbAttirbutes.RemoveAt(e.OldStartingIndex);
-                    Model.MsbAttirbutes.Insert(e.NewStartingIndex, item1);
+                    Model.MsbAttributes.RemoveAt(e.OldStartingIndex);
+                    Model.MsbAttributes.Insert(e.NewStartingIndex, item1);
                     break;
 
                 case NotifyCollectionChangedAction.Reset:
-                    Model.MsbAttirbutes.Clear();
+                    Model.MsbAttributes.Clear();
                     break;
             }
         }

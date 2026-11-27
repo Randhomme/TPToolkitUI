@@ -21,6 +21,8 @@
                 <ResourceDictionary Source="/DataTemplate/WorldObject/CollisionFactoriesViewModelTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplate/WorldObject/CustomInfoFactoriesViewModelTemplate.xaml"/>
                 <ResourceDictionary Source="/DataTemplate/WorldObject/PhysicsFactoriesViewModelTemplate.xaml"/>
+                <ResourceDictionary Source="DataTemplate/WorldObject/RenderEntityFactoryViewModelTemplate.xaml"/>
+                <ResourceDictionary Source="DataTemplate/WorldObject/MeshAttributeViewModelTemplate.xaml"/>
                 <!--<ResourceDictionary Source="/Styles/MenuStyle.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -14,6 +14,7 @@ using TPToolkitUI.ViewModels.WorldObject.AiEntityFactories;
 using TPToolkitUI.ViewModels.WorldObject.CollisionFactories;
 using TPToolkitUI.ViewModels.WorldObject.CustomInfoFactories;
 using TPToolkitUI.ViewModels.WorldObject.PhysicsFactories;
+using TPToolkitUI.ViewModels.WorldObject.RenderEntityFactories;
 
 namespace TPToolkitUI.ViewModels
 {
@@ -32,6 +33,8 @@ namespace TPToolkitUI.ViewModels
         public partial CustomInfoFactory CustomInfoFactory { get; set; }
         [ObservableProperty]
         public partial PhysicsFactory PhysicsFactory { get; set; }
+        [ObservableProperty]
+        public partial RenderEntityFactory RenderEntityFactory { get; set; }
         [ObservableProperty]
         public partial AiEntityDefinitionViewModel? AiEntityDefinitionViewModel { get; private set; }
         [ObservableProperty]
@@ -125,6 +128,18 @@ namespace TPToolkitUI.ViewModels
                     PhysicsFactory.SpaceObjectPhysics => new SpaceObjectPhysicsViewModel(new(worldObjectTypeString)),
                     PhysicsFactory.TorpedoPhysics => new TorpedoPhysicsViewModel(new(worldObjectTypeString)),
                     PhysicsFactory.WhalePhysics => new WhalePhysicsViewModel(new(worldObjectTypeString)),
+                    _ => null,
+                };
+            }
+        }
+
+        partial void OnRenderEntityFactoryChanged(RenderEntityFactory value)
+        {
+            if (shouldUpdateViewModelsFromUI)
+            {
+                RenderEntityDefinitionViewModel = value switch
+                {
+                    RenderEntityFactory.RenderEntityFactory => new RenderEntityFactoryViewModel(new(worldObjectTypeString)),
                     _ => null,
                 };
             }
@@ -702,6 +717,17 @@ namespace TPToolkitUI.ViewModels
                 default:
                     PhysicsDefinitionViewModel = null;
                     PhysicsFactory = PhysicsFactory.None;
+                    break;
+            }
+            switch (worldObjectType.RenderEntityDefinition)
+            {
+                case TPToolkitLib.WorldObject.Definitions.RenderEntityFactories.RenderEntityFactory renderEntityFactory:
+                    RenderEntityDefinitionViewModel = new RenderEntityFactoryViewModel(renderEntityFactory);
+                    RenderEntityFactory = RenderEntityFactory.RenderEntityFactory;
+                    break;
+                default:
+                    RenderEntityDefinitionViewModel = null;
+                    RenderEntityFactory = RenderEntityFactory.None;
                     break;
             }
             shouldUpdateViewModelsFromUI = true;
