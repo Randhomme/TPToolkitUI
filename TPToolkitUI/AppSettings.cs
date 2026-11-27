@@ -14,6 +14,7 @@ namespace TPToolkitUI
     {
         public static ObservableCollection<WorldObjectType> Asteroids { get; } = [];
         public static ObservableCollection<WorldObjectType> Bullets { get; } = [];
+        public static ObservableCollection<WorldObjectType> Guns { get; } = [];
         public static ObservableCollection<string> Effects { get; } = [];
         public static ObservableCollection<string> HudEntries { get; } = [];
         public static ObservableCollection<string> Meshes { get; } = [];
@@ -78,6 +79,7 @@ namespace TPToolkitUI
         {
             Asteroids.Clear();
             Bullets.Clear();
+            Guns.Clear();
             Effects.Clear();
             HudEntries.Clear();
             Meshes.Clear();
@@ -91,6 +93,8 @@ namespace TPToolkitUI
                     Asteroids.Add(item);
                 else if (item.CustomInfoDefinition is BulletCustomInfoFactory)
                     Bullets.Add(item);
+                else if (item.CustomInfoDefinition is GunCustomInfoFactory)
+                    Guns.Add(item);
             }
             foreach (var item in TPGameTool.Effects)
             {
